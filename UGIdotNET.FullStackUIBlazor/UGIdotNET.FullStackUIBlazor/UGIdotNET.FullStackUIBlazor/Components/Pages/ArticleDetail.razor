@@ -1,0 +1,51 @@
+﻿@page "/article/{id:guid}/{slug}"
+@attribute [StreamRendering]
+
+<PageTitle>UGIdotNET Spike time - @model?.Title</PageTitle>
+
+@if (model is null)
+{
+    <h2>Loading...</h2>
+}
+else
+{
+    <h3>@model.Title</h3>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">@model.Abstract</div>
+    </div>
+    <div class="row">
+        <ArticleComments Id="model.Id"
+                         @rendermode="InteractiveWebAssembly"/>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Slug { get; set; } = string.Empty;
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private ArticleViewModel? model = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(400);
+        model = new()
+        {
+            Id = Guid.NewGuid(),
+            Title = $"Titolo {Id}",
+            Abstract = $"Articolo {Id} molto bello e interessante"
+        };
+    }
+
+    class ArticleViewModel
+    {
+        public Guid Id { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+
+        public string Abstract { get; set; } = string.Empty;
+    }
+}

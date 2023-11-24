@@ -1,0 +1,60 @@
+﻿@page "/"
+@attribute [StreamRendering]
+
+<PageTitle>Home</PageTitle>
+
+<h1>Spike time - Episodio 1</h1>
+
+<div class="row">
+    @if (articles is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        foreach (var article in articles)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.Title</h5>
+                        <p class="card-text">@article.Abstract</p>
+                        <a href="/article/@article.Id/@article.Slug">Leggi</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private List<ArticleListItem>? articles = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+
+        articles = new();
+        for (int i = 0; i < 10; i++)
+        {
+            articles.Add(new()
+            {
+                Id = Guid.NewGuid(),
+                Title = $"Titolo #{i+1}",
+                Slug = $"titolo-{i+1}",
+                Abstract = $"Articolo numero {i+1} molto bello e interessante"
+            });
+        }
+    }
+
+    class ArticleListItem
+    {
+        public Guid Id { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+
+        public string Slug { get; set; } = string.Empty;
+
+        public string Abstract { get; set; } = string.Empty;
+    }
+}

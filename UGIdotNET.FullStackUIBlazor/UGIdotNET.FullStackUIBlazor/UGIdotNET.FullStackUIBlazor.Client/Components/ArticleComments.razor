@@ -1,0 +1,81 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <EditForm Model="model" OnValidSubmit="SubmitAsync">
+            <DataAnnotationsValidator />
+
+            <div>
+                <label>Autore</label>
+                <InputText class="form-control" @bind-Value="model.Author" />
+            </div>
+            <div>
+                <label>Commento</label>
+                <InputTextArea class="form-control" 
+                               @bind-Value="model.Comment"
+                               rows="10" />
+                <ValidationMessage For="@(() => model.Comment)" class="text-danger" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-lg btn-primary">Commenta</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+<div class="row">
+    @foreach (var comment in comments) 
+    {
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                        <h5 class="card-title">@comment.Author:</h5>
+                        <p class="card-text">@comment.Comment</p>
+                    </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private List<CommentViewModel> comments = new();
+
+    private CommentViewModel model = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(400);
+        for (var i = 0; i < 4; i++)
+        {
+            comments.Add(new()
+            {
+                Id = Guid.NewGuid(),
+                Author = $"Autore {i+1}",
+                Comment = $"Commento all'articolo {i+1}"
+            });
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await Task.Delay(200);
+        comments.Add(new() 
+        {
+            Id = Guid.NewGuid(),
+            Author = model.Author,
+            Comment = model.Comment
+        });
+
+        model = new();
+    }
+
+    class CommentViewModel 
+    {
+        public Guid Id { get; set; }
+
+        public string Author { get; set; } = string.Empty;
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Comment { get; set; } = string.Empty;
+    }
+}

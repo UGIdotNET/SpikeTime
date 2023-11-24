@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.FullStackUIBlazor", "UGIdotNET.FullStackUIBlazor\UGIdotNET.FullStackUIBlazor\UGIdotNET.FullStackUIBlazor.csproj", "{BED50A63-0FAA-4657-9A23-5D3937CD31CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.FullStackUIBlazor.Client", "UGIdotNET.FullStackUIBlazor\UGIdotNET.FullStackUIBlazor.Client\UGIdotNET.FullStackUIBlazor.Client.csproj", "{94C72A73-CB16-4ADF-AD81-F03185A45364}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BED50A63-0FAA-4657-9A23-5D3937CD31CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED50A63-0FAA-4657-9A23-5D3937CD31CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED50A63-0FAA-4657-9A23-5D3937CD31CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED50A63-0FAA-4657-9A23-5D3937CD31CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C72A73-CB16-4ADF-AD81-F03185A45364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C72A73-CB16-4ADF-AD81-F03185A45364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C72A73-CB16-4ADF-AD81-F03185A45364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C72A73-CB16-4ADF-AD81-F03185A45364}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F6DDC76-9DE6-4478-AD51-BDF095E973F2}
+	EndGlobalSection
+EndGlobal
