@@ -1,0 +1,24 @@
+﻿@page "/auth"
+
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize]
+@rendermode InteractiveAuto
+
+<PageTitle>Auth</PageTitle>
+
+<h1>You are authenticated</h1>
+
+<AuthorizeView>
+    Hello @GetFullName(context.User)!
+</AuthorizeView>
+
+@code {
+    private string GetFullName(System.Security.Claims.ClaimsPrincipal user)
+    {
+        var firstName = user.FindFirst(System.Security.Claims.ClaimTypes.GivenName)?.Value ?? string.Empty;
+        var lastName = user.FindFirst(System.Security.Claims.ClaimTypes.Surname)?.Value ?? string.Empty;
+
+        return $"{firstName} {lastName}";
+    }
+}

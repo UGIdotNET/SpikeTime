@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34321.82
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.IdentityApi.WebApi", "UGIdotNET.IdentityApi.WebApi\UGIdotNET.IdentityApi.WebApi.csproj", "{6F5D2F68-4B00-49AC-81DF-04FDD144BDB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.IdentityApi.Blazor", "UGIdotNET.IdentityApi.Blazor\UGIdotNET.IdentityApi.Blazor\UGIdotNET.IdentityApi.Blazor.csproj", "{8B04049D-5769-42D4-BF26-5439CA52B000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.IdentityApi.Blazor.Client", "UGIdotNET.IdentityApi.Blazor\UGIdotNET.IdentityApi.Blazor.Client\UGIdotNET.IdentityApi.Blazor.Client.csproj", "{8A8B9EC9-F79C-42F4-AFA3-0432247B4A36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6F5D2F68-4B00-49AC-81DF-04FDD144BDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F5D2F68-4B00-49AC-81DF-04FDD144BDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F5D2F68-4B00-49AC-81DF-04FDD144BDB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B04049D-5769-42D4-BF26-5439CA52B000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B04049D-5769-42D4-BF26-5439CA52B000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B04049D-5769-42D4-BF26-5439CA52B000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B04049D-5769-42D4-BF26-5439CA52B000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8B9EC9-F79C-42F4-AFA3-0432247B4A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8B9EC9-F79C-42F4-AFA3-0432247B4A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8B9EC9-F79C-42F4-AFA3-0432247B4A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8B9EC9-F79C-42F4-AFA3-0432247B4A36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
