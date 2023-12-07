@@ -1,0 +1,6 @@
+@UGIdotNET.IdentityApi.WebApi_HostAddress = http://localhost:5195
+
+GET {{UGIdotNET.IdentityApi.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
