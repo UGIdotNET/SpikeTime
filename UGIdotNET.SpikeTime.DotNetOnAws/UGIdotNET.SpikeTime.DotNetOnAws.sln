@@ -5,7 +5,12 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UGIdotNET.SpikeTime.DotNetOnAws", "UGIdotNET.SpikeTime.DotNetOnAws\UGIdotNET.SpikeTime.DotNetOnAws.csproj", "{EFC48D6C-151E-4E01-8E0B-D997BDE55477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.DotNetOnAws.Wasm", "UGIdotNET.SpikeTime.DotNetOnAws.Wasm\UGIdotNET.SpikeTime.DotNetOnAws.Wasm.csproj", "{14BDF46E-B2C2-4AFC-A176-657A4CE4A792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UGIdotNET.SpikeTime.DotNetOnAws.Wasm", "UGIdotNET.SpikeTime.DotNetOnAws.Wasm\UGIdotNET.SpikeTime.DotNetOnAws.Wasm.csproj", "{14BDF46E-B2C2-4AFC-A176-657A4CE4A792}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7E9615D9-A561-4DEE-9472-EC61EE60CAE4}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
