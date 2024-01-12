@@ -1,0 +1,66 @@
+﻿@page "/books"
+
+@inject BooksApiClient BooksClient
+
+<h3>Books</h3>
+
+<div class="row">
+    <EditForm Model="query" OnValidSubmit="SearchAsync">
+        <div class="col-md-4">
+            <label>Title</label>
+            <InputText @bind-Value="query.Title"
+                       class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label>Sort by year</label>
+            <InputSelect @bind-Value="query.Sort" class="form-control">
+                <option value="asc">Meno recente</option>
+                <option value="desc">Più recente</option>
+            </InputSelect>
+        </div>
+        <div class="col-md-4">
+            <button type="submit">Search</button>
+        </div>
+    </EditForm>
+</div>
+
+<hr />
+@if (model.Value.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Pages</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in model.Value)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Year</td>
+                    <td>@book.Pages</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    private BookListResult model = new();
+
+    private BookListQuery query = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await BooksClient.GetBooksAsync(query);
+    }
+
+    private async Task SearchAsync()
+    {
+        model = await BooksClient.GetBooksAsync(query);
+    }
+}
