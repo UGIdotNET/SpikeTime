@@ -8,7 +8,7 @@ public class BooksApiClient(HttpClient http)
 
     public async Task<BookListResult> GetBooksAsync(BookListQuery query)
     {
-        var url = $"api/Book?$orderby=year {query.Sort}";
+        var url = $"data-api/rest/Book?$orderby=year {query.Sort}";
         if (!string.IsNullOrWhiteSpace(query.Title))
         {
             url = $"{url}&$filter=title eq '{query.Title}'";
