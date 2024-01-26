@@ -1,0 +1,80 @@
+﻿@page "/weather"
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+
+@inject WeatherApiClient WeatherApi
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+<div class="row">
+    <EditForm Model="model" OnValidSubmit="SubmitAsync" FormName="NewWeatherForecast">
+        <div>
+            <label>Date</label>
+            <InputDate @bind-Value="model.Date" class="form-control" />
+        </div>
+
+        <div>
+            <label>Temp.</label>
+            <InputNumber @bind-Value="model.TemperatureC" class="form-control" />
+        </div>
+
+        <div>
+            <label>Summary</label>
+            <InputText @bind-Value="model.Summary" class="form-control" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </EditForm>
+</div>
+<hr />
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    private WeatherForecast model = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await WeatherApi.GetWeatherAsync();
+    }
+
+    private async Task SubmitAsync()
+    {
+        await WeatherApi.SaveWeatherAsync(model);
+    }
+}
