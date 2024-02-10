@@ -31,3 +31,9 @@ In questo repository trovate tutti gli esempi di codice visti durante gli episod
 [Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3339/Spike-time/Cloud-Native-con-NET-Aspire)
 
 [Codice](./UGIdotNET.SpikeTime.AspireStarter/)
+
+## 6 - Caching senza segreti con FusionCache
+
+[Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3348/Spike-time/Caching-senza-segreti-con-FusionCache)
+
+[Codice](./UGIdotNET.SpikeTime.FusionCache/)

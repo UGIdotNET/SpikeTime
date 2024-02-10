@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.FusionCache", "UGIdotNET.SpikeTime.FusionCache\UGIdotNET.SpikeTime.FusionCache.csproj", "{ED101E16-25A6-46B3-B829-AA4FE72E6664}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UGIdotNET.SpikeTime.FusionCache", "UGIdotNET.SpikeTime.FusionCache\UGIdotNET.SpikeTime.FusionCache.csproj", "{ED101E16-25A6-46B3-B829-AA4FE72E6664}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{80FAB375-7F81-47E7-A641-383B4FDADAB2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
