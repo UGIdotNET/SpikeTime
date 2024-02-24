@@ -37,3 +37,9 @@ In questo repository trovate tutti gli esempi di codice visti durante gli episod
 [Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3348/Spike-time/Caching-senza-segreti-con-FusionCache)
 
 [Codice](./UGIdotNET.SpikeTime.FusionCache/)
+
+## 7 - Entity Framework Core in .NET 8
+
+[Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3364/Spike-time/Entity-Framework-Core-in-NET-8)
+
+[Codice](./UGIdotNET.SpikeTime.EFCore/)
