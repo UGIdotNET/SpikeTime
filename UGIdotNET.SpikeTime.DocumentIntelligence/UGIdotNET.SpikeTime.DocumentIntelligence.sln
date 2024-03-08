@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.DocumentIntelligence", "UGIdotNET.SpikeTime.DocumentIntelligence\UGIdotNET.SpikeTime.DocumentIntelligence.csproj", "{B077ADF8-6365-48D7-A6C9-3C96D278E0AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.DocumentIntelligence.Api", "UGIdotNET.SpikeTime.DocumentIntelligence.Api\UGIdotNET.SpikeTime.DocumentIntelligence.Api.csproj", "{FC55F628-59D8-4539-ACE3-B703412E844F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B077ADF8-6365-48D7-A6C9-3C96D278E0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B077ADF8-6365-48D7-A6C9-3C96D278E0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B077ADF8-6365-48D7-A6C9-3C96D278E0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B077ADF8-6365-48D7-A6C9-3C96D278E0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC55F628-59D8-4539-ACE3-B703412E844F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC55F628-59D8-4539-ACE3-B703412E844F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC55F628-59D8-4539-ACE3-B703412E844F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC55F628-59D8-4539-ACE3-B703412E844F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA4802D4-9A53-475F-8DF0-A45FD968E5AD}
+	EndGlobalSection
+EndGlobal

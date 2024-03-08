@@ -1,0 +1,77 @@
+﻿@page "/"
+
+@inject HttpClient HttpClient
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<EditForm Model="model" OnValidSubmit="SubmitAsync">
+    <div class="mb-2">
+        <label>Upload your receipt</label>
+        <InputFile class="form-control" OnChange="OnFileSelected" />
+    </div>
+
+    <div class="mb-2">
+        <label>Merchant name</label>
+        <InputText class="form-control" @bind-Value="model.MerchantName" />
+    </div>
+    <div class="mb-2">
+        <label>Total amount</label>
+        <InputNumber class="form-control" @bind-Value="model.TotalAmount" />
+    </div>
+    <div class="mb-2">
+        <label>Transaction date</label>
+        <InputDate class="form-control" @bind-Value="model.TransactionDate" />
+    </div>
+    <div class="mb-2">
+        <label>Description</label>
+        <InputText class="form-control" @bind-Value="model.Description" />
+    </div>
+</EditForm>
+
+@code {
+    private ViewModel model = new();
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        using var fileStream = e.File.OpenReadStream(10_000_000);
+
+        var content = new MultipartFormDataContent();
+        var fileContent = new StreamContent(fileStream);
+        fileContent.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(e.File.ContentType);
+
+        content.Add(fileContent, "file", e.File.Name);
+
+        var response = await HttpClient.PostAsync("api/upload", content);
+        if (!response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("ERROR!");
+        }
+        else
+        {
+            model = await response.Content.ReadFromJsonAsync<ViewModel>() ?? new();
+
+            Console.WriteLine(model.MerchantName);
+            Console.WriteLine(model.TotalAmount);
+            Console.WriteLine(model.TransactionDate);
+            Console.WriteLine(model.Description);
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await Task.CompletedTask;
+    }
+
+    class ViewModel
+    {
+        public string MerchantName { get; set; } = string.Empty;
+
+        public double TotalAmount { get; set; } = 0;
+
+        public DateTime? TransactionDate { get; set; }
+
+        public string Description { get; set; } = string.Empty;
+    }
+}
