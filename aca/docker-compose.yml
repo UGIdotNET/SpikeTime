@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  spiketime.ui:
+    image: ${DOCKER_REGISTRY-}spiketimeui
+    build:
+      context: .
+      dockerfile: SpikeTime.UI/Dockerfile
+
+  spiketime.catalog:
+    image: ${DOCKER_REGISTRY-}spiketimecatalog
+    build:
+      context: .
+      dockerfile: SpikeTime.Catalog/Dockerfile
+

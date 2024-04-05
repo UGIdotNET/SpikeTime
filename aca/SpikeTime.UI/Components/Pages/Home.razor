@@ -1,0 +1,46 @@
+﻿@page "/"
+@inject IHttpClientFactory HttpClientFactory
+
+@attribute [StreamRendering]
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+<hr />
+@if (loading)
+{
+    <h2>Loading...</h2>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in products)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">&euro; @product.Price</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private bool loading = false;
+    private SpikeTime.CatalogModels.ProductListItem[] products = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        loading = true;
+
+        using var httpClient = HttpClientFactory.CreateClient("CatalogAPI");
+        products = await httpClient.GetFromJsonAsync<SpikeTime.CatalogModels.ProductListItem[]>("api/products") ?? [];
+
+        loading = false;
+    }
+}
