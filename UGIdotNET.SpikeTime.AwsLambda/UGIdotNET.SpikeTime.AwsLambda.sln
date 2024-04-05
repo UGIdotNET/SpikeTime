@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UGIdotNET.SpikeTime.AwLambdaIntro", "UGIdotNET.SpikeTime.AwLambdaIntro\UGIdotNET.SpikeTime.AwLambdaIntro.csproj", "{3B8F79A4-698A-4A37-9FB1-19E7943876FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UGIdotNET.SpikeTime.AwsLambdaServerless", "UGIdotNET.SpikeTime.AwsLambdaServerless\UGIdotNET.SpikeTime.AwsLambdaServerless.csproj", "{1200253D-7285-47A3-9E48-D6283AA48C95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B8F79A4-698A-4A37-9FB1-19E7943876FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8F79A4-698A-4A37-9FB1-19E7943876FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8F79A4-698A-4A37-9FB1-19E7943876FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8F79A4-698A-4A37-9FB1-19E7943876FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1200253D-7285-47A3-9E48-D6283AA48C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1200253D-7285-47A3-9E48-D6283AA48C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1200253D-7285-47A3-9E48-D6283AA48C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1200253D-7285-47A3-9E48-D6283AA48C95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD46A13F-A882-4A8E-859A-5E0C837039B8}
+	EndGlobalSection
+EndGlobal
