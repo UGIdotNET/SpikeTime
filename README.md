@@ -43,3 +43,21 @@ In questo repository trovate tutti gli esempi di codice visti durante gli episod
 [Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3364/Spike-time/Entity-Framework-Core-in-NET-8)
 
 [Codice](./UGIdotNET.SpikeTime.EFCore/)
+
+## 8 - Azure AI Document Intelligence
+
+[Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3365/Spike-time/Azure-AI-Document-Intelligence)
+
+[Codice](./UGIdotNET.SpikeTime.DocumentIntelligence/)
+
+## 9 - Serverless con AWS Lambda
+
+[Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3416/Spike-time/Serverless-con-AWS-Lambda)
+
+[Codice](./UGIdotNET.SpikeTime.AwsLambda/)
+
+## 10 - Microservices con Azure Container Apps
+
+[Puntata su UGIdotNET](https://www.ugidotnet.org/tv/episodio/3428/Spike-time/Microservices-con-Azure-Container-Apps)
+
+[Codice](./aca/)
