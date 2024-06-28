@@ -1,0 +1,27 @@
+﻿@rendermode InteractiveAuto
+
+<FluentDataGrid Id="weathergrid" Items="@Forecasts" GridTemplateColumns="1fr 1fr 1fr 2fr" TGridItem="WeatherForecast">
+    <SelectColumn TGridItem="WeatherForecast"
+                  SelectMode="DataGridSelectMode.Single"
+                  @bind-SelectedItems="@selectedItems" />
+    <PropertyColumn Title="Date" Property="@(c => c!.Date)" Align="Align.Start" />
+    <TemplateColumn Title="Temp. (C)" Align="Align.Center">
+        <div class="flex items-center">
+            <span style="color: @(context.TemperatureC > 30 ? "red" : "green");">@context.TemperatureC °C</span>
+        </div>
+    </TemplateColumn>
+    <PropertyColumn Title="Temp. (F)" Property="@(c => c!.TemperatureF)" Align="Align.Center" />
+    <PropertyColumn Title="Summary" Property="@(c => c!.Summary)" Align="Align.End" />
+</FluentDataGrid>
+
+@code {
+    [Parameter]
+    public IQueryable<WeatherForecast> Forecasts { get; set; } = Enumerable.Empty<WeatherForecast>().AsQueryable();
+
+    private IEnumerable<WeatherForecast> selectedItems = [];
+
+    protected override void OnParametersSet()
+    {
+        selectedItems = Forecasts.Where(f => f.Selected);
+    }
+}

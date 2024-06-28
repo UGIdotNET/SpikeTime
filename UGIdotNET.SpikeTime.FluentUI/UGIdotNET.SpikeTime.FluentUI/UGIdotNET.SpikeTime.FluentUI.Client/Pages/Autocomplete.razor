@@ -1,0 +1,53 @@
+﻿@page "/autocomplete"
+@rendermode InteractiveAuto
+
+<h3>Autocomplete</h3>
+
+<FluentDesignTheme @bind-Mode="@Mode"
+                   @bind-OfficeColor="@OfficeColor" />
+
+<FluentAutocomplete TOption="Country"
+                    AutoComplete="off"
+                    Autofocus="true"
+                    Label="Select a country"
+                    Width="250px"
+                    MaxAutoHeight="200px"
+                    Placeholder="Select countries"
+                    OnOptionsSearch="@OnSearch"
+                    MaximumSelectedOptions="5"
+                    OptionText="@(item => item.Name)"
+                    @bind-SelectedOptions="@SelectedItems"/>
+
+@code {
+    private IEnumerable<Country> SelectedItems = [];
+
+    public DesignThemeModes Mode { get; set; }
+    public OfficeColor? OfficeColor { get; set; }
+
+    void OnLoaded(LoadedEventArgs e)
+    {
+        Console.WriteLine($"Loaded: {(e.Mode == DesignThemeModes.System ? "System" : "")} {(e.IsDark ? "Dark" : "Light")}");
+    }
+
+    void OnLuminanceChanged(LuminanceChangedEventArgs e)
+    {
+        Console.WriteLine($"Changed: {(e.Mode == DesignThemeModes.System ? "System" : "")} {(e.IsDark ? "Dark" : "Light")}");
+    }
+
+    void PickRandomColor()
+    {
+        OfficeColor = OfficeColorUtilities.GetRandom();
+    }
+
+    private void OnSearch(OptionsSearchEventArgs<Country> e)
+    {
+        var countries = Countries.Where(c => c.Name.Contains(e.Text, StringComparison.InvariantCultureIgnoreCase));
+        e.Items = countries;
+    }
+
+    private static IEnumerable<Country> Countries = [
+        new("Italia"), new("Germania"), new("Francia"), new("Gran Bretagna"), new("Spagna"), new("Usa")
+        ];
+
+    record Country(string Name);
+}
