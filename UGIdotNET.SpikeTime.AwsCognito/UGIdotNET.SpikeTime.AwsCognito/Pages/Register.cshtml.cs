@@ -32,9 +32,9 @@ public class RegisterModel : PageModel
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "UserName")]
-        public string UserName { get; set; }
+        //[Required]
+        //[Display(Name = "UserName")]
+        //public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -63,15 +63,17 @@ public class RegisterModel : PageModel
         returnUrl = returnUrl ?? Url.Content("~/");
         if (ModelState.IsValid)
         {
-            var user = _pool.GetUser(Input.UserName);
+            var user = _pool.GetUser(Input.Email);
             user.Attributes.Add(CognitoAttribute.Email.AttributeName, Input.Email);
+            user.Attributes.Add(CognitoAttribute.Profile.AttributeName, Input.Email);
+            user.Attributes.Add(CognitoAttribute.Name.AttributeName, "Alberto");
 
             var result = await _userManager.CreateAsync(user, Input.Password);
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-
-                return RedirectToPage("./ConfirmAccount");
+                
+                return RedirectToPage("./Confirm");
             }
             foreach (var error in result.Errors)
             {

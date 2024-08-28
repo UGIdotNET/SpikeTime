@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace UGIdotNET.SpikeTime.AwsCognito.Pages;
 public class IndexModel : PageModel

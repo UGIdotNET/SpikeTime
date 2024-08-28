@@ -39,18 +39,18 @@ public class ConfirmModel : PageModel
         returnUrl = returnUrl ?? Url.Content("~/");
         if (ModelState.IsValid)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(userEmail);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{userId}'.");
+                return NotFound($"Unable to load user with ID '{userEmail}'.");
             }
 
             var result = await _userManager.ConfirmSignUpAsync(user, Input.Code, true);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Error confirming account for user with ID '{userId}':");
+                throw new InvalidOperationException($"Error confirming account for user with ID '{userEmail}':");
             }
             else
             {
