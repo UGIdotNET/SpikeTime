@@ -1,0 +1,79 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<RadzenButton Click="IncrementCount">Click me</RadzenButton>
+
+<hr />
+
+<EditForm Model="model" OnValidSubmit="Submit">
+    <RadzenRow AlignItems="AlignItems.End" Wrap="FlexWrap.Wrap" Gap="1rem" class="rz-p-sm-12">
+        <RadzenColumn Size="12" SizeMD="6" SizeLG="3">
+            <RadzenFormField Text="Text" Style="width: 100%;">
+                <RadzenTextBox @bind-Value="@model.Text" Style="width: 100%;" />
+            </RadzenFormField>
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6" SizeLG="3">
+            <RadzenFormField Text="Date" Variant="Variant.Flat" Style="width: 100%;">
+                <RadzenDatePicker @bind-Value="@model.Date" Style="width: 100%;" ShowTime="false" />
+            </RadzenFormField>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+        <RadzenColumn Size="6">
+            <RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "Button2"))" />
+            <RadzenTextArea @bind-Value=@model.SpeechText Change=@(args => OnTextAreaChange(args, "TextArea")) Style="width: 100%" class="rz-mt-4" aria-label="text area" />
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem" class="rz-mt-8 rz-mb-4">
+        <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Save" />
+        <RadzenButton ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Large" Icon="cancel" Text="Cancel" />
+    </RadzenStack>
+</EditForm>
+
+@code {
+    private int currentCount = 0;
+
+    private ViewModel model = new();
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    void OnTextAreaChange(string value, string name)
+    {
+        Console.WriteLine($"{name} value changed to {value}");
+    }
+
+    void OnSpeechCaptured(string speechValue, bool updateTextArea, string name)
+    {
+        Console.WriteLine($"Speech Captured from {name}: {speechValue}");
+
+        if (updateTextArea)
+        {
+            model.SpeechText += speechValue;
+        }
+    }
+
+    private void Submit()
+    {
+        Console.WriteLine($"{model.Text} - {model.Date}");
+    }
+
+    class ViewModel
+    {
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Text { get; set; } = string.Empty;
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public DateOnly? Date { get; set; }
+
+        public string SpeechText { get; set; } = string.Empty;
+    }
+}

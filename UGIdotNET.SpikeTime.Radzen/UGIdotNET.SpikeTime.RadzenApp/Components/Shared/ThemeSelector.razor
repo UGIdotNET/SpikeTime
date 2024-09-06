@@ -1,0 +1,22 @@
+﻿@rendermode InteractiveServer
+
+@inject ThemeService ThemeService
+
+<RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" class="rz-p-sm-2">
+    <RadzenLabel Text="Change the current theme" />
+    <RadzenDropDown Name="ThemeDropDown"
+                    TValue="string"
+                    Value="@ThemeService.Theme"
+                    ValueChanged="@ChangeTheme"
+                    Data="@Themes.All"
+                    TextProperty="@nameof(Theme.Text)"
+                    ValueProperty="@nameof(Theme.Value)">
+    </RadzenDropDown>
+</RadzenStack>
+
+@code {
+    private void ChangeTheme(string value)
+    {
+        ThemeService.SetTheme(value);
+    }
+}
