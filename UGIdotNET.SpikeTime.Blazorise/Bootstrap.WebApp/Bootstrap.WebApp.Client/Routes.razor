@@ -1,0 +1,46 @@
+﻿<Blazorise.ThemeProvider Theme="@theme">
+    <Router AppAssembly="typeof(Program).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="routeData" DefaultLayout="typeof(Layouts.MainLayout)" />
+            <FocusOnNavigate RouteData="routeData" Selector="h1" />
+        </Found>
+    </Router>
+    <MessageProvider />
+    <PageProgressProvider />
+</Blazorise.ThemeProvider>
+
+@code {
+    private Theme theme = new()
+        {
+            BarOptions = new()
+            {
+                HorizontalHeight = "72px"
+            },
+            ColorOptions = new()
+            {
+                Primary = "#0288D1",
+                Secondary = "#A65529",
+                Success = "#23C02E",
+                Info = "#9BD8FE",
+                Warning = "#F8B86C",
+                Danger = "#F95741",
+                Light = "#F0F0F0",
+                Dark = "#535353",
+            },
+            BackgroundOptions = new()
+            {
+                Primary = "#0288D1",
+                Secondary = "#A65529",
+                Success = "#23C02E",
+                Info = "#9BD8FE",
+                Warning = "#F8B86C",
+                Danger = "#F95741",
+                Light = "#F0F0F0",
+                Dark = "#535353",
+            },
+            InputOptions = new()
+            {
+                CheckColor = "#0288D1",
+            }
+        };
+}

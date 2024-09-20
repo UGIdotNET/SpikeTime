@@ -1,0 +1,75 @@
+﻿@page "/simple-datagrid"
+<DataGrid TItem="Book"
+          Data="data"
+          Editable
+          Sortable
+          SortMode="DataGridSortMode.Single"
+          ShowPager
+          ShowPageSizes
+          Resizable
+          Responsive
+          Bordered
+          Hoverable
+          Narrow
+          Groupable
+          ShowGrouping
+          ResizeMode="TableResizeMode.Columns"
+          NewItemCreator="() => new Book(string.Empty, string.Empty, string.Empty, DateOnly.MinValue, string.Empty)">
+    <DataGridColumns>
+        <DataGridColumn Field="@nameof(Book.Title)" Caption="Title" Editable></DataGridColumn>
+        <DataGridColumn Field="@nameof(Book.Author)" Caption="Author" Editable Groupable></DataGridColumn>
+        <DataGridColumn Field="@nameof(Book.Isbn)" Caption="Isbn" Editable></DataGridColumn>
+        <DataGridColumn Field="@nameof(Book.PublicationDate)" Caption="Publication Date" Editable></DataGridColumn>
+        <DataGridColumn Field="@nameof(Book.Publisher)" Caption="Publisher" Editable></DataGridColumn>
+        <DataGridCommandColumn PreventRowClick>
+            <NewCommandTemplate>
+                <Button Color="Color.Success" Clicked="@context.Clicked">@context.LocalizationString</Button>
+            </NewCommandTemplate>
+            <EditCommandTemplate>
+                <Button Color="Color.Primary" Clicked="@context.Clicked">@context.LocalizationString</Button>
+            </EditCommandTemplate>
+            <SaveCommandTemplate>
+                <Button Type="ButtonType.Submit" PreventDefaultOnSubmit Color="Color.Primary" Clicked="@context.Clicked">@context.LocalizationString</Button>
+            </SaveCommandTemplate>
+            <DeleteCommandTemplate>
+                <Button Color="Color.Danger" Clicked="@context.Clicked">@context.LocalizationString</Button>
+            </DeleteCommandTemplate>
+            <CancelCommandTemplate>
+                <Button Color="Color.Secondary" Clicked="@context.Clicked">@context.LocalizationString</Button>
+            </CancelCommandTemplate>
+            <ClearFilterCommandTemplate>
+                <Button Color="Color.Warning" Clicked="@context.Clicked">@context.LocalizationString</Button>
+            </ClearFilterCommandTemplate>
+        </DataGridCommandColumn>
+    </DataGridColumns>
+</DataGrid>
+
+@code {
+    private List<Book> data = new()
+    {
+        new("Harry Potter and the Sorcerer's Stone", "J.K. Rowling","9780590353427", new(1997,6,26),  "Scholastic Press" ),
+        new("To Kill a Mockingbird", "Harper Lee", "9780061120084", new(1960,7,11),  "J.B. Lippincott & Co." ),
+        new("The Catcher in the Rye", "J.D. Salinger","9780316769488", new(1951,7,16),  "Little, Brown and Company" ),
+        new("The Great Gatsby", "F. Scott Fitzgerald","9780743273565", new(1925,4,10),  "Charles Scribner's Sons" ),
+        new("The Lord of the Rings", "J.R.R. Tolkien", "9780544003415", new(1954,7,29), "George Allen & Unwin"),
+        new("The Hobbit", "J.R.R. Tolkien", "9780547928227", new(1937,9,21), "George Allen & Unwin"),
+        new("The Chronicles of Narnia: The Lion, the Witch, and the Wardrobe", "C.S. Lewis", "9780064471073", new(1950,10,16), "Geoffrey Bles"),
+        new("Animal Farm", "George Orwell", "978451219811", new(1945,8,17), "Secker & Warburg"),
+        new("The Adventures of Huckleberry Finn", "Mark Twain", "9780142437254", new(1884,12,10), "Chatto & Windus"),
+        new("The Diary of a Young Girl", "Anne Frank", "9780385473788", new(1947,6,25), "Doubleday"),
+        new("The Hunger Games", "Suzanne Collins", "9780439023481", new(2008,9,14), "Scholastic Press"),
+        new("The Maze Runner", "James Dashner", "9780385737965", new(2009,10,6), "Delacorte Press"),
+        new("The Secret Life of Bees", "Sue Monk Kidd", "9780670034852", new(2002,5,5), "Viking Press"),
+        new("The Strange Case of Dr. Jekyll and Mr. Hyde", "Robert Louis Stevenson", "9781593080171", new(1886,1,5), "Longmans, Green and Co"),
+        new("Harry Potter and the Chamber of Secrets", "J.K. Rowling", "9780439064866", new(1998,7,2), "Scholastic Press"),
+        new("Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", "9780439136365", new(1999,7,8), "Scholastic Press"),
+        new("Catching Fire", "Suzanne Collins", "9780439023498", new(2009,9,1), "Scholastic Press"),
+        new("Mockingjay", "Suzanne Collins", "9780439023528", new(2010,8,24), "Scholastic Press"),
+        new("The Children of Hurin", "J.R.R. Tolkien", "9780544003422", new(2007,4,17), "Houghton Mifflin Harcourt"),
+        new("Beren and Luthien", "J.R.R. Tolkien", "9780544116813", new(2017,5,23), "Houghton Mifflin Harcourt")
+    };
+
+    private record Book( string Title, string Author, string Isbn, DateOnly PublicationDate, string Publisher );
+
+
+}

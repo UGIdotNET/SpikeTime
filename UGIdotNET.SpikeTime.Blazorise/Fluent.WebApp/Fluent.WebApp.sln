@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32916.344
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluent.WebApp", "Fluent.WebApp\Fluent.WebApp.csproj", "{A1073A31-9C1C-4B5F-8752-F4397F84E210}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7557}") = "Fluent.WebApp.Client", "Fluent.WebApp.Client\Fluent.WebApp.Client.csproj", "{B202D843-6F6D-4BE1-ADAA-353ABE7B8E39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1073A31-9C1C-4B5F-8752-F4397F84E210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1073A31-9C1C-4B5F-8752-F4397F84E210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1073A31-9C1C-4B5F-8752-F4397F84E210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1073A31-9C1C-4B5F-8752-F4397F84E210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B202D843-6F6D-4BE1-ADAA-353ABE7B8E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B202D843-6F6D-4BE1-ADAA-353ABE7B8E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B202D843-6F6D-4BE1-ADAA-353ABE7B8E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B202D843-6F6D-4BE1-ADAA-353ABE7B8E39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C59BEA9D-058E-406A-BE53-A3BC184DCF72}
+	EndGlobalSection
+EndGlobal

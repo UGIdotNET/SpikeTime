@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+		<StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+		<Version>1.6</Version>
+		<Authors>Megabit</Authors>
+		<Company>Megabit</Company>
+		<Description>
+			This is a Blazorise Template for a Blazor WebApp Application.
+			Blazorise is a component library built on top of Blazor and CSS frameworks like Bootstrap, FluentUI2, Tailwind, Bulma and Material.
+		</Description>
+		<Copyright>Copyright 2018-2024 Megabit</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.*" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Blazorise"					Version="1.6.*" />
+		<PackageReference Include="Blazorise.Bootstrap5"		Version="1.6.*" />
+		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.6.*" />
+		<PackageReference Include="Blazorise.DataGrid"			Version="1.6.*" />
+	</ItemGroup>
+
+</Project>
+	
