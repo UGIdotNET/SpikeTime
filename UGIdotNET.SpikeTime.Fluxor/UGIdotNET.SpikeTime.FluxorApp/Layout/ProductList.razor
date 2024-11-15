@@ -1,0 +1,29 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@inject IDispatcher Dispatcher
+@inject IStateSelection<CartState, IReadOnlyList<Product>> AvailableProductsSelection
+
+<ul>
+    @foreach (var product in AvailableProductsSelection.Value)
+    {
+        <li>
+            <span>@product.Name - &euro; @product.Price</span>
+            <button @onclick="@(() => AddToCart(product))">Add to cart</button>
+        </li>
+    }
+</ul>
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        AvailableProductsSelection.Select(state => state.AvailableProducts);
+
+        Dispatcher.Dispatch(new LoadProductsAction());
+    }
+
+    private void AddToCart(Product product)
+    {
+        Dispatcher.Dispatch(new AddProductToCartAction(product));
+    }
+}
