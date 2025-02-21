@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-UGIdotNET.SpikeTime.Aspire9.Migrations-0ee0f799-b5e0-45b0-a0f4-62bd4baf7d55</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.Aspire9.Entities\UGIdotNET.SpikeTime.Aspire9.Entities.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.Aspire9.ServiceDefaults\UGIdotNET.SpikeTime.Aspire9.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>
