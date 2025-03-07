@@ -1,0 +1,60 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAzure.AppHost", "UGIdotNET.SpikeTime.AspireAzure.AppHost\UGIdotNET.SpikeTime.AspireAzure.AppHost.csproj", "{59D365C1-2E50-428B-B0CF-0BFB947F3273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAzure.ServiceDefaults", "UGIdotNET.SpikeTime.AspireAzure.ServiceDefaults\UGIdotNET.SpikeTime.AspireAzure.ServiceDefaults.csproj", "{D4D518F7-E2F7-7A4C-38FA-0A8020744E3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAzure.ApiService", "UGIdotNET.SpikeTime.AspireAzure.ApiService\UGIdotNET.SpikeTime.AspireAzure.ApiService.csproj", "{B3C1BFF5-D79A-0A5B-EB17-ECEBE531669F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAzure.Web", "UGIdotNET.SpikeTime.AspireAzure.Web\UGIdotNET.SpikeTime.AspireAzure.Web.csproj", "{2A21CC0F-C4D8-7F7C-30F4-D82AD7C52975}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAzure.Entities", "UGIdotNET.SpikeTime.AspireAzure.Entities\UGIdotNET.SpikeTime.AspireAzure.Entities.csproj", "{11DD99D1-442D-4D9A-8DDA-FE74E7C69A25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAzure.Migrations", "UGIdotNET.SpikeTime.AspireAzure.Migrations\UGIdotNET.SpikeTime.AspireAzure.Migrations.csproj", "{5E7A668E-2985-47F7-8E87-5B3F845038AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		azure.yaml = azure.yaml
+		next-steps.md = next-steps.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59D365C1-2E50-428B-B0CF-0BFB947F3273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59D365C1-2E50-428B-B0CF-0BFB947F3273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59D365C1-2E50-428B-B0CF-0BFB947F3273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59D365C1-2E50-428B-B0CF-0BFB947F3273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D518F7-E2F7-7A4C-38FA-0A8020744E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D518F7-E2F7-7A4C-38FA-0A8020744E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D518F7-E2F7-7A4C-38FA-0A8020744E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D518F7-E2F7-7A4C-38FA-0A8020744E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C1BFF5-D79A-0A5B-EB17-ECEBE531669F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C1BFF5-D79A-0A5B-EB17-ECEBE531669F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C1BFF5-D79A-0A5B-EB17-ECEBE531669F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C1BFF5-D79A-0A5B-EB17-ECEBE531669F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A21CC0F-C4D8-7F7C-30F4-D82AD7C52975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A21CC0F-C4D8-7F7C-30F4-D82AD7C52975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A21CC0F-C4D8-7F7C-30F4-D82AD7C52975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A21CC0F-C4D8-7F7C-30F4-D82AD7C52975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11DD99D1-442D-4D9A-8DDA-FE74E7C69A25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11DD99D1-442D-4D9A-8DDA-FE74E7C69A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11DD99D1-442D-4D9A-8DDA-FE74E7C69A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11DD99D1-442D-4D9A-8DDA-FE74E7C69A25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E7A668E-2985-47F7-8E87-5B3F845038AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E7A668E-2985-47F7-8E87-5B3F845038AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E7A668E-2985-47F7-8E87-5B3F845038AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E7A668E-2985-47F7-8E87-5B3F845038AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9921FE64-41F6-4A46-9151-EA0345A012E2}
+	EndGlobalSection
+EndGlobal

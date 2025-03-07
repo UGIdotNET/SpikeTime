@@ -1,0 +1,58 @@
+﻿@page "/product/{id:guid}"
+@rendermode InteractiveServer
+
+@inject ProductsApiClient ProductsApiClient
+
+<h1>Product detail</h1>
+
+@if (product is null)
+{
+    <h2>No product found :(</h2>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <p>@product.Name</p>
+            <p>@product.Description</p>
+            <p>@product.Price</p>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-2">
+                <InputFile OnChange="LoadFile" />
+            </div>
+            <div class="mb-2">
+                <button @onclick="UploadAsync" type="button">upload</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private Product? product = new();
+
+    private IBrowserFile? file;
+
+    private void LoadFile(InputFileChangeEventArgs e)
+    {
+        file = e.File;
+    }
+
+    private async Task UploadAsync()
+    {
+        if (file is not null)
+        {
+            await ProductsApiClient.UploadProductImageAsync(Id, file);
+            file = null;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await ProductsApiClient.GetProductAsync(Id);
+    }
+}
