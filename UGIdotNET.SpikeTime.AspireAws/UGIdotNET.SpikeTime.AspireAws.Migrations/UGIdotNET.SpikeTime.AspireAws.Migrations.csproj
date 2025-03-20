@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-UGIdotNET.SpikeTime.AspireAws.Migrations-9bf98b3f-ab81-4d37-8af0-3d1fbac34907</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.1.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.Entities\UGIdotNET.SpikeTime.AspireAws.Entities.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.ServiceDefaults\UGIdotNET.SpikeTime.AspireAws.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>

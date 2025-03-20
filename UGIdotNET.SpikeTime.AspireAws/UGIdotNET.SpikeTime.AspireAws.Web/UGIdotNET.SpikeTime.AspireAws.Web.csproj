@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.Entities\UGIdotNET.SpikeTime.AspireAws.Entities.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.ServiceDefaults\UGIdotNET.SpikeTime.AspireAws.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>
