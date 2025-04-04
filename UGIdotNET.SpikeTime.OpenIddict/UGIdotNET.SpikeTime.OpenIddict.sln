@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.OpenIddict", "UGIdotNET.SpikeTime.OpenIddict\UGIdotNET.SpikeTime.OpenIddict.csproj", "{AFA2F679-3BCC-4EE4-85CE-80D691B5D6DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.OpenIddict.ConsoleApp", "UGIdotNET.SpikeTime.OpenIddict.ConsoleApp\UGIdotNET.SpikeTime.OpenIddict.ConsoleApp.csproj", "{90D5B2EE-4479-4718-B633-A39885C68557}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFA2F679-3BCC-4EE4-85CE-80D691B5D6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA2F679-3BCC-4EE4-85CE-80D691B5D6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA2F679-3BCC-4EE4-85CE-80D691B5D6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA2F679-3BCC-4EE4-85CE-80D691B5D6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D5B2EE-4479-4718-B633-A39885C68557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D5B2EE-4479-4718-B633-A39885C68557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D5B2EE-4479-4718-B633-A39885C68557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D5B2EE-4479-4718-B633-A39885C68557}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8534BECB-F728-4EB9-8F39-347DD9AA78AA}
+	EndGlobalSection
+EndGlobal
