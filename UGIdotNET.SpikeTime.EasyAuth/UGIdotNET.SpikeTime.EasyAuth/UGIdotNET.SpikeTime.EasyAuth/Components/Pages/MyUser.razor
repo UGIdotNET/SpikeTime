@@ -1,0 +1,46 @@
+﻿@page "/myuser"
+
+<h1>MyUser</h1>
+
+<ul>
+    <li>
+        <strong>X-MS-CLIENT-PRINCIPAL</strong>: @clientPrincipal
+    </li>
+    <li>
+        <strong>X-MS-CLIENT-PRINCIPAL-ID</strong>: @principalId
+    </li>
+    <li>
+        <strong>X-MS-CLIENT-PRINCIPAL-NAME</strong>: @principalName
+    </li>
+    <li>
+        <strong>X-MS-CLIENT-PRINCIPAL-IDP</strong>: @principalIdp
+    </li>
+</ul>
+
+@code {
+    [CascadingParameter]
+    public HttpContext HttpContext { get; set; } = default!;
+
+    private string clientPrincipal = string.Empty;
+    private string principalId = string.Empty;
+    private string principalName = string.Empty;
+    private string principalIdp = string.Empty;
+
+    private string errorMessage = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            clientPrincipal = HttpContext.Request.Headers["X-MS-CLIENT-PRINCIPAL"]!;
+            principalId = HttpContext.Request.Headers["X-MS-CLIENT-PRINCIPAL-ID"]!;
+            principalName = HttpContext.Request.Headers["X-MS-CLIENT-PRINCIPAL-NAME"]!;
+            principalIdp = HttpContext.Request.Headers["X-MS-CLIENT-PRINCIPAL-IDP"]!;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.ToString();
+        }
+
+    }
+}

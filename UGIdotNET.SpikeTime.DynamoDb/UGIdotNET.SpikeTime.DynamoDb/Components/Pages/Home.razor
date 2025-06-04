@@ -1,0 +1,135 @@
+﻿@page "/"
+@inject IConfiguration Configuration
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+
+<div class="row">
+    <EditForm Model="newSong" OnValidSubmit="AddSongAsync">
+        <div class="mb-2">
+            <label>Artist</label>
+            <InputText class="form-control" @bind-Value="newSong.Artist" />
+        </div>
+        <div class="mb-2">
+            <label>Song title</label>
+            <InputText class="form-control" @bind-Value="newSong.SongTitle" />
+        </div>
+        <div class="mb-2">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </EditForm>
+</div>
+
+<hr />
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Artist</th>
+                <th>Song title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var song in songs)
+            {
+                <tr>
+                    <td>@song.Artist</td>
+                    <td>@song.SongTitle</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@code {
+    private AmazonDynamoDBClient client;
+
+    private List<SongItemViewModel> songs = [];
+
+    private SongItemViewModel newSong = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var credentials = new BasicAWSCredentials(
+            Configuration["AWSCredentials:AccessKeyId"],
+            Configuration["AWSCredentials:AccessKeySecret"]);
+
+        client = new AmazonDynamoDBClient(credentials, Amazon.RegionEndpoint.EUWest1);
+
+        await LoadSongsAsync();
+    }
+
+    private async Task LoadSongsAsync()
+    {
+        songs = [];
+        var musicTable = Table.LoadTable(client, "Music");
+
+        var config = new QueryOperationConfig()
+        {
+            Limit = 10, // 10 items per page.
+            Select = SelectValues.SpecificAttributes,
+            AttributesToGet = new List<string>
+                {
+                  "Artist",
+                  "SongTitle",
+                },
+            ConsistentRead = true,
+            Filter = new QueryFilter(),
+            KeyExpression = new Expression
+            {
+                ExpressionStatement = "Artist = :artist",
+                ExpressionAttributeValues = new Dictionary<string, DynamoDBEntry>
+                {
+                    { ":artist", "Pink Floyd" }
+                }
+            }
+        };
+
+        Search search = musicTable.Query(config);
+        do
+        {
+            var songList = await search.GetNextSetAsync();
+
+            foreach (var song in songList)
+            {
+                songs.Add(new SongItemViewModel
+                {
+                    Artist = song["Artist"].AsString(),
+                    SongTitle = song["SongTitle"].AsString()
+                });
+            }
+        }
+        while (!search.IsDone);
+    }
+
+    private async Task AddSongAsync()
+    {
+        var request = new PutItemRequest
+        {
+            TableName = "Music",
+            Item = new Dictionary<string, AttributeValue>
+            {
+                { "Artist", new AttributeValue { S = newSong.Artist } },
+                { "SongTitle", new AttributeValue { S = newSong.SongTitle } }
+            }
+        };
+
+        var response = await client.PutItemAsync(request);
+
+        newSong = new();
+        await LoadSongsAsync();
+    }
+
+    record SongItemViewModel
+    {
+        public string Artist { get; set; }
+
+        public string SongTitle { get; set; }
+    }
+}

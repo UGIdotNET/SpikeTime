@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.Auth0", "UGIdotNET.SpikeTime.Auth0\UGIdotNET.SpikeTime.Auth0\UGIdotNET.SpikeTime.Auth0.csproj", "{DC471FCB-1B8D-43C0-BA01-3F8ACD9CCFF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.Auth0.Client", "UGIdotNET.SpikeTime.Auth0\UGIdotNET.SpikeTime.Auth0.Client\UGIdotNET.SpikeTime.Auth0.Client.csproj", "{32A6C358-3BE6-4312-AE6B-F328B4300D8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC471FCB-1B8D-43C0-BA01-3F8ACD9CCFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC471FCB-1B8D-43C0-BA01-3F8ACD9CCFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC471FCB-1B8D-43C0-BA01-3F8ACD9CCFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC471FCB-1B8D-43C0-BA01-3F8ACD9CCFF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A6C358-3BE6-4312-AE6B-F328B4300D8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A6C358-3BE6-4312-AE6B-F328B4300D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A6C358-3BE6-4312-AE6B-F328B4300D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A6C358-3BE6-4312-AE6B-F328B4300D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14EB338B-3CED-4E53-A938-7DE6FB390A4E}
+	EndGlobalSection
+EndGlobal

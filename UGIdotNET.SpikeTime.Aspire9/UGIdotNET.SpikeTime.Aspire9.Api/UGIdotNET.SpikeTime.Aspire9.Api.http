@@ -1,0 +1,6 @@
+@UGIdotNET.SpikeTime.Aspire9.Api_HostAddress = http://localhost:5287
+
+GET {{UGIdotNET.SpikeTime.Aspire9.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

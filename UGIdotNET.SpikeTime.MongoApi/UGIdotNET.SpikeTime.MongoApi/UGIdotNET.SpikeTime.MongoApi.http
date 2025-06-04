@@ -1,0 +1,6 @@
+@UGIdotNET.SpikeTime.MongoApi_HostAddress = http://localhost:5062
+
+GET {{UGIdotNET.SpikeTime.MongoApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,59 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAws.AppHost", "UGIdotNET.SpikeTime.AspireAws.AppHost\UGIdotNET.SpikeTime.AspireAws.AppHost.csproj", "{D35BF35C-6B71-4F63-8C9A-68371AE18C37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAws.ServiceDefaults", "UGIdotNET.SpikeTime.AspireAws.ServiceDefaults\UGIdotNET.SpikeTime.AspireAws.ServiceDefaults.csproj", "{C49939DA-0F77-A687-826E-7E69F5C810AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAws.ApiService", "UGIdotNET.SpikeTime.AspireAws.ApiService\UGIdotNET.SpikeTime.AspireAws.ApiService.csproj", "{C1F9BBED-C0AC-DD16-634E-5A52C4A046F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAws.Web", "UGIdotNET.SpikeTime.AspireAws.Web\UGIdotNET.SpikeTime.AspireAws.Web.csproj", "{BF587CA6-F9C8-0BD6-51EC-C13687805BBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAws.Entities", "UGIdotNET.SpikeTime.AspireAws.Entities\UGIdotNET.SpikeTime.AspireAws.Entities.csproj", "{1D68EDBB-FA8B-4EAE-BCDE-BF0C782B14BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTime.AspireAws.Migrations", "UGIdotNET.SpikeTime.AspireAws.Migrations\UGIdotNET.SpikeTime.AspireAws.Migrations.csproj", "{2E238999-2CC1-0F04-94BF-93FEFE3D422F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D35BF35C-6B71-4F63-8C9A-68371AE18C37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35BF35C-6B71-4F63-8C9A-68371AE18C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35BF35C-6B71-4F63-8C9A-68371AE18C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35BF35C-6B71-4F63-8C9A-68371AE18C37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C49939DA-0F77-A687-826E-7E69F5C810AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C49939DA-0F77-A687-826E-7E69F5C810AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C49939DA-0F77-A687-826E-7E69F5C810AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C49939DA-0F77-A687-826E-7E69F5C810AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F9BBED-C0AC-DD16-634E-5A52C4A046F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F9BBED-C0AC-DD16-634E-5A52C4A046F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F9BBED-C0AC-DD16-634E-5A52C4A046F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F9BBED-C0AC-DD16-634E-5A52C4A046F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF587CA6-F9C8-0BD6-51EC-C13687805BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF587CA6-F9C8-0BD6-51EC-C13687805BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF587CA6-F9C8-0BD6-51EC-C13687805BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF587CA6-F9C8-0BD6-51EC-C13687805BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D68EDBB-FA8B-4EAE-BCDE-BF0C782B14BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D68EDBB-FA8B-4EAE-BCDE-BF0C782B14BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D68EDBB-FA8B-4EAE-BCDE-BF0C782B14BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D68EDBB-FA8B-4EAE-BCDE-BF0C782B14BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E238999-2CC1-0F04-94BF-93FEFE3D422F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E238999-2CC1-0F04-94BF-93FEFE3D422F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E238999-2CC1-0F04-94BF-93FEFE3D422F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E238999-2CC1-0F04-94BF-93FEFE3D422F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC37F0EC-DC05-473A-98F3-1A3EE2DE50AE}
+	EndGlobalSection
+EndGlobal

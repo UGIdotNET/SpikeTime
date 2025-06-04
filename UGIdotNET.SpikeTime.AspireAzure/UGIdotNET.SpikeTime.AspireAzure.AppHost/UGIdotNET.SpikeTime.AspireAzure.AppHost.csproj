@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>c472ca8c-3127-4459-bb62-4114e4d38d9e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAzure.ApiService\UGIdotNET.SpikeTime.AspireAzure.ApiService.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAzure.Migrations\UGIdotNET.SpikeTime.AspireAzure.Migrations.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAzure.Web\UGIdotNET.SpikeTime.AspireAzure.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.Sql" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="9.1.0" />
+	<PackageReference Include="Aspire.Hosting.SqlServer" Version="9.1.0" />
+  </ItemGroup>
+
+</Project>

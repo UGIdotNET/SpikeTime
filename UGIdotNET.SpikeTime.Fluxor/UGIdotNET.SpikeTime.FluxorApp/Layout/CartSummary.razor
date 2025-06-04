@@ -1,0 +1,27 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@inject IState<CartState> CartState
+@inject IDispatcher Dispatcher
+
+<h3>Cart</h3>
+
+<p>Tot. products: @CartState.Value.NumberOfProducts</p>
+<p>Tot. price: &euro; @CartState.Value.TotalPrice</p>
+
+<hr />
+
+<ul>
+    @foreach (var product in CartState.Value.Products)
+    {
+        <li>
+            <span>@product.Name - &euro; @product.Price</span>
+            <button @onclick="@(() => RemoveProductFromCart(product))">Remove from cart</button>
+        </li>
+    }
+</ul>
+
+@code {
+    private void RemoveProductFromCart(Product product)
+    {
+        Dispatcher.Dispatch(new RemoveProductFromCartAction(product));
+    }
+}

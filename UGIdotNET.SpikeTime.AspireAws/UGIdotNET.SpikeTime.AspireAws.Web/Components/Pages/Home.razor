@@ -1,0 +1,85 @@
+﻿@page "/"
+
+@attribute [StreamRendering]
+
+@inject ProductsApiClient ProductsApiClient
+@inject IConfiguration Configuration 
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in products)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>
+                            <a href="product/@product.Id">detail</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <EditForm Model="Product" FormName="addproduct" OnValidSubmit="SaveProductAsync" method="post">
+            <div class="mb-2">
+                <label>
+                    Name
+                </label>
+                <InputText class="form-control" @bind-Value="Product.Name" />
+            </div>
+            <div class="mb-2">
+                <label>
+                    Price
+                </label>
+                <InputNumber class="form-control" @bind-Value="Product.Price" />
+            </div>
+            <div class="mb-2">
+                <label>
+                    Description
+                </label>
+                <InputText class="form-control" @bind-Value="Product.Description" />
+            </div>
+            <div class="mb-2">
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Product[] products = [];
+
+    [SupplyParameterFromForm]
+    private Product Product { get; set; } = new Product();
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductsApiClient.GetProductsAsync();
+    }
+
+    private async Task SaveProductAsync()
+    {
+        await ProductsApiClient.CreateProductAsync(Product);
+        products = await ProductsApiClient.GetProductsAsync();
+
+        Product = new();
+    }
+}

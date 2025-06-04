@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>b7016a2c-e5d2-4859-9dd9-32d5580e4f82</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.ApiService\UGIdotNET.SpikeTime.AspireAws.ApiService.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.Migrations\UGIdotNET.SpikeTime.AspireAws.Migrations.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.AspireAws.Web\UGIdotNET.SpikeTime.AspireAws.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.AWS" Version="9.1.5" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.1.0" />
+  </ItemGroup>
+
+</Project>
