@@ -1,0 +1,41 @@
+﻿@page "/"
+@using SmartComponents
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<div class="row">
+    <div class="col-md-12 mb-2">
+        <SmartTextArea @bind-Value="@textAreaText"
+                       UserRole="@userRole"
+                       class="form-control"
+                       rows="4"/>
+    </div>
+    <div class="col-md-12 mb-2">
+        <SmartComboBox @bind-Value="comboBoxText"
+                       Url="api/combobox-items"
+                       class="form-control"/>
+    </div>
+</div>
+
+@code {
+    private string? textAreaText;
+
+    private string? comboBoxText;
+
+    string userRole = "Sei un agente assicurativo che si deve interfacciare con un cliente. Usa un tono informale ma cerca sempre di vendere la nuova polizza assicurativa";
+
+    //string[] userPhrases = [
+    //    "Yee-haw!",
+    //    "So you wanna mosey on down for a bite?",
+    //    "Why sure, we can cook you up somethin' special",
+    //    "We're open everyday except Tuesdays (that's when we're at the rodeo)",
+    //    "Sorry pardner, even if you're the sherrif, we gotta stick to our policy!",
+    //    "Can I book you in for NEED_INFO",
+    //    "How can I help you, kind stranger?",
+    //    "Our website is at https://wildbrunch.example.com/"
+    //];
+}

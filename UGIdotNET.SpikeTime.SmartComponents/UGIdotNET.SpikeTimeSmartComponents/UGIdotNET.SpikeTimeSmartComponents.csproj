@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>72c69789-5876-430b-9965-ffd31b4813a0</UserSecretsId>
+  </PropertyGroup>
+
+  <Import Project="..\..\..\smartcomponents\src\SmartComponents.LocalEmbeddings\build\SmartComponents.LocalEmbeddings.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\smartcomponents\src\SmartComponents.AspNetCore\SmartComponents.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\smartcomponents\src\SmartComponents.Inference.OpenAI\SmartComponents.Inference.OpenAI.csproj" />
+    <ProjectReference Include="..\..\..\smartcomponents\src\SmartComponents.LocalEmbeddings\SmartComponents.LocalEmbeddings.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SmartComponents", "SmartComponents", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartComponents.AspNetCore", "..\..\smartcomponents\src\SmartComponents.AspNetCore\SmartComponents.AspNetCore.csproj", "{FE562C14-5CCC-C2A5-3714-7C000C74B2D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartComponents.Inference.OpenAI", "..\..\smartcomponents\src\SmartComponents.Inference.OpenAI\SmartComponents.Inference.OpenAI.csproj", "{FA478C51-0100-587E-8B9D-DA8176637A88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartComponents.AspNetCore.Components", "..\..\smartcomponents\src\SmartComponents.AspNetCore.Components\SmartComponents.AspNetCore.Components.csproj", "{A51723DC-9C14-A330-379F-7687CABC52E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UGIdotNET.SpikeTimeSmartComponents", "UGIdotNET.SpikeTimeSmartComponents\UGIdotNET.SpikeTimeSmartComponents.csproj", "{3514B851-19D7-4457-BFFF-9BDA266DFDE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartComponents.LocalEmbeddings", "..\..\smartcomponents\src\SmartComponents.LocalEmbeddings\SmartComponents.LocalEmbeddings.csproj", "{21442B88-12B5-BC80-BC2D-D8BE4878CB36}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE562C14-5CCC-C2A5-3714-7C000C74B2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE562C14-5CCC-C2A5-3714-7C000C74B2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE562C14-5CCC-C2A5-3714-7C000C74B2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE562C14-5CCC-C2A5-3714-7C000C74B2D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA478C51-0100-587E-8B9D-DA8176637A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA478C51-0100-587E-8B9D-DA8176637A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA478C51-0100-587E-8B9D-DA8176637A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA478C51-0100-587E-8B9D-DA8176637A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51723DC-9C14-A330-379F-7687CABC52E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51723DC-9C14-A330-379F-7687CABC52E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51723DC-9C14-A330-379F-7687CABC52E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51723DC-9C14-A330-379F-7687CABC52E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3514B851-19D7-4457-BFFF-9BDA266DFDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3514B851-19D7-4457-BFFF-9BDA266DFDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3514B851-19D7-4457-BFFF-9BDA266DFDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3514B851-19D7-4457-BFFF-9BDA266DFDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21442B88-12B5-BC80-BC2D-D8BE4878CB36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21442B88-12B5-BC80-BC2D-D8BE4878CB36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21442B88-12B5-BC80-BC2D-D8BE4878CB36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21442B88-12B5-BC80-BC2D-D8BE4878CB36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE562C14-5CCC-C2A5-3714-7C000C74B2D8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{FA478C51-0100-587E-8B9D-DA8176637A88} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A51723DC-9C14-A330-379F-7687CABC52E2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{21442B88-12B5-BC80-BC2D-D8BE4878CB36} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FF02210-1580-4187-9652-9D5B90875124}
+	EndGlobalSection
+EndGlobal
