@@ -2,9 +2,9 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <!-- Akka.NET Package Versions -->
   <ItemGroup>
-    <PackageVersion Include="Akka.Hosting" Version="1.5.17.1" />
+    <PackageVersion Include="Akka.Hosting" Version="1.5.42" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.5" />
   </ItemGroup>
 </Project>
