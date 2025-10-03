@@ -1,0 +1,60 @@
+﻿@page "/"
+@using Microsoft.Extensions.AI
+
+@inject IChatClient ChatClient
+
+<PageTitle>Telerik Blazor App | Home</PageTitle>
+
+<div>
+    <TelerikAIPrompt OnPromptRequest="HandlePromptRequestAsync"
+                     Commands="commands"
+                     OnCommandExecute="HandleCommandAsync"/>
+</div>
+<div>
+    <p>@response</p>
+</div>
+
+<style>
+    #home-page {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: max-content;
+        text-align: center;
+        font-size: var(--kendo-font-size-xl);
+    }
+
+    @@media (min-height: calc(56px + 50px + 400px)) {
+        /* header + footer + home page container*/
+        #home-page {
+            margin-top: calc(50vh - 28px - 25px - 200px);
+        }
+    }
+</style>
+
+@code {
+    private string? response;
+
+    private List<AIPromptCommandDescriptor> commands = [
+        new(){ Id = "ai", Title = "Talk me about Azure Open AI", Prompt = "You are an helpful assistant expert in AI topics. Keep your answers short" },
+        new(){ Id = "blazor", Title = "Talk me about Blazor", Prompt = "You are an helpful assistant expert in ASP.NET Core Blazor and web frontend development. Keep your answers short" },
+    ];
+
+    private async Task HandleCommandAsync(AIPromptCommandExecuteEventArgs args)
+    {
+        var chatResponse = await ChatClient.GetResponseAsync([
+            new ChatMessage(ChatRole.System, args.Command.Prompt),
+            new ChatMessage(ChatRole.User, args.Command.Title),
+        ]);
+
+        response = chatResponse.Text;
+    }
+
+    private async Task HandlePromptRequestAsync(AIPromptPromptRequestEventArgs args)
+    {
+        var chatResponse = await ChatClient.GetResponseAsync([
+            new ChatMessage(ChatRole.User, args.Prompt)
+            ]);
+
+        response = chatResponse.Text;
+    }
+}

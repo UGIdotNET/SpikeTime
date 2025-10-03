@@ -1,0 +1,139 @@
+﻿@inherits LayoutComponentBase
+
+@implements IDisposable
+
+@inject NavigationManager NavManager
+
+<TelerikRootComponent>
+
+    <TelerikAppBar ThemeColor="@ThemeConstants.AppBar.ThemeColor.Base"
+                   Class="appbar-top">
+        <AppBarSection>
+            <TelerikButton Icon="@SvgIcon.Menu"
+                           FillMode="@ThemeConstants.Button.FillMode.Clear"
+                           OnClick="@( () => DrawerExpanded = !DrawerExpanded )" />
+        </AppBarSection>
+        <AppBarSection>
+            <div id="app-title">
+                <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.2477 14.5932C17.2477 14.7922 17.1047 15.0366 16.926 15.1344L12.4541 17.6552V7.92806L3.83203 3.06798L8.30392 0.547161C8.47908 0.445909 8.76863 0.445909 8.94736 0.547161L17.2477 5.22918V14.5932ZM10.5381 9.0139L4.63275 5.67957C4.45759 5.58181 4.16805 5.58181 3.98931 5.67957L0 7.93155L6.22705 11.4439V18.4687L10.2164 16.2167C10.3915 16.1155 10.5381 15.8711 10.5381 15.6721V9.0104V9.0139ZM0 14.9563L4.30746 17.3864V12.5228L0 14.9563Z" fill="#96CA4F" />
+                </svg>
+                <NavLink href="/"><strong>Progress</strong><sup>&reg;</sup> Telerik<sup>&reg;</sup> UI for Blazor</NavLink>
+            </div>
+        </AppBarSection>
+        <AppBarSpacer />
+        <AppBarSection>
+            <a href="https://www.telerik.com/blazor-ui" target="_blank" id="product-page-link"
+               title="Go to Telerik UI for Blazor Product Page">Telerik UI for Blazor Product Page</a>
+        </AppBarSection>
+    </TelerikAppBar>
+
+    <TelerikDrawer Data="@DrawerData"
+                   Expanded="@DrawerExpanded"
+                   ExpandedChanged="@DrawerExpandedChanged"
+                   @bind-SelectedItem="@DrawerSelectedItem"
+                   Mode="@DrawerMode.Push"
+                   MiniMode="true"
+                   Class="mainlayout-drawer">
+        <DrawerContent>
+            <main>
+                @Body
+            </main>
+        </DrawerContent>
+    </TelerikDrawer>
+
+    <TelerikAppBar ThemeColor="@ThemeConstants.AppBar.ThemeColor.Base"
+                   Class="appbar-bottom">
+        <AppBarSpacer />
+        <AppBarSection>
+            <div id="copyright">Copyright &copy; @DateTime.Today.Year Progress Software. All rights reserved.</div>
+        </AppBarSection>
+        <AppBarSpacer />
+    </TelerikAppBar>
+
+    <TelerikMediaQuery Media="(min-width: 641px)" OnChange="@OnMediaQueryChange" />
+
+</TelerikRootComponent>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+@code {
+    private IEnumerable<NavItem> DrawerData { get; set; } = new List<NavItem>()
+    {
+        new NavItem("Home", SvgIcon.Home, "/"),
+        new NavItem("Counter", SvgIcon.CustomFormat, "/counter"),
+        new NavItem("Weather", SvgIcon.Globe, "/weather"),
+        new NavItem("Chat", SvgIcon.Circle, "/chat"),
+        new NavItem("About", SvgIcon.InfoCircle, "/about"),
+    };
+
+    private bool DrawerExpanded { get; set; } = true;
+
+    private NavItem? DrawerSelectedItem { get; set; }
+
+    private bool LargeScreen { get; set; } = true;
+
+    private void OnMediaQueryChange(bool mediaQueryMatched)
+    {
+        LargeScreen = DrawerExpanded = mediaQueryMatched;
+    }
+
+    private void DrawerExpandedChanged(bool newExpanded)
+    {
+        if (!LargeScreen && !newExpanded)
+        {
+            DrawerExpanded = newExpanded;
+        }
+    }
+
+    private void SelectDrawerItem()
+    {
+        var url = NavManager.Uri.Replace(NavManager.BaseUri, "/").ToLowerInvariant();
+
+        DrawerSelectedItem = DrawerData.FirstOrDefault(x => x.Url.ToLowerInvariant() == url);
+    }
+
+    private void NavManagerLocationChanged(object? sender, LocationChangedEventArgs args)
+    {
+        var url = args.Location.Replace(NavManager.BaseUri, "/").ToLowerInvariant();
+
+        DrawerSelectedItem = DrawerData.FirstOrDefault(x => x.Url.ToLowerInvariant() == url);
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnInitialized()
+    {
+        SelectDrawerItem();
+
+        NavManager.LocationChanged += NavManagerLocationChanged;
+
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        if (NavManager != null)
+        {
+            NavManager.LocationChanged -= NavManagerLocationChanged;
+        }
+    }
+
+    public class NavItem
+    {
+        public string Text { get; set; }
+        public object? Icon { get; set; }
+        public string Url { get; set; } = string.Empty;
+
+        public NavItem(string text, object? icon, string url)
+        {
+            Text = text;
+            Icon = icon;
+            Url = url;
+        }
+    }
+}

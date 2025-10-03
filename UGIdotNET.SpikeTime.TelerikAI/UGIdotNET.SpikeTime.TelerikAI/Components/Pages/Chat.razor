@@ -1,0 +1,103 @@
+﻿@page "/chat"
+@using Microsoft.Extensions.AI
+@using AIChatMessage = Microsoft.Extensions.AI.ChatMessage
+
+@inject IChatClient ChatClient
+
+<PageTitle>Telerik Blazor App | Chat</PageTitle>
+
+<h1>Chat</h1>
+
+<div>
+    <TelerikChat Data="messages"
+                 @ref="@chat"
+                 MessageWidthMode="@MessageWidthMode.Standard"
+                 OnSendMessage="AskAsync"
+                 AuthorId="user"
+                 TextField="Content">
+        <HeaderTemplate>
+            <div class="chat-header-container">
+                <span>Spike time chat</span>
+            </div>
+        </HeaderTemplate>
+    </TelerikChat>
+</div>
+
+@code {
+    private TelerikChat<ChatMessage> chat;
+
+    private List<ChatMessage> messages = [];
+
+    private async Task AskAsync(ChatSendMessageEventArgs args)
+    {
+        var prompt = new ChatMessage()
+        {
+            Id = Guid.NewGuid().ToString(),
+            AuthorId = "user",
+            AuthorName = "John Doe",
+            Content = args.Message,
+            Timestamp = DateTime.Now,
+            Status = ""
+        };
+
+        var response = new ChatMessage()
+        {
+            Id = Guid.NewGuid().ToString(),
+            AuthorId = "ai",
+            AuthorName = "AI Assistant",
+            AuthorImageUrl = "https://demos.telerik.com/blazor-ui/images/devcraft-ninja-small.svg",
+            Timestamp = DateTime.Now,
+            Status = ""
+        };
+
+        messages.Add(prompt);
+        var chatMessages = messages.Select(m =>
+        {
+            ChatRole role = m.AuthorId switch
+            {
+                "user" => ChatRole.User,
+                _ => ChatRole.Assistant
+            };
+
+            return new AIChatMessage(role, m.Content);
+        });
+        
+        messages.Add(response);
+        chat?.Refresh();
+
+        var fullResponse = string.Empty;
+        await foreach (var answer in ChatClient.GetStreamingResponseAsync(chatMessages))
+        {
+            fullResponse += answer.Text;
+            response.Content = fullResponse;
+            chat?.Refresh();
+        }
+    }
+
+    public class ChatMessage
+    {
+        public string Id { get; set; }
+
+        public string AuthorId { get; set; }
+
+        public string AuthorName { get; set; }
+
+        public string AuthorImageUrl { get; set; }
+
+        public string Content { get; set; }
+
+        public string MessageToReplyId { get; set; }
+
+        public string Status { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public bool IsPinned { get; set; }
+
+        public DateTime Timestamp { get; set; }
+
+        public List<string> SuggestedActions { get; set; }
+
+        public IEnumerable<FileSelectFileInfo> Attachments { get; set; } = new List<FileSelectFileInfo>();
+    }
+}
