@@ -1,0 +1,97 @@
+﻿@page "/search"
+
+@inject SmartFilterProvider FilterProvider
+
+<PageTitle>Search</PageTitle>
+
+<h1>Search</h1>
+
+<div class="grid-container">
+    <DxLoadingPanel Visible="LoadingPanelVisible" ApplyBackgroundShading="true">
+        <DxGrid Data="DictionaryEntries"
+                ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                VirtualScrollingEnabled="true"
+                TextWrapEnabled="false">
+            <Columns>
+                <DxGridDataColumn FieldName="Id" Width="20" CaptionAlignment="GridTextAlignment.Right" />
+                <DxGridDataColumn FieldName="Name" />
+                <DxGridDataColumn FieldName="Description" />
+            </Columns>
+            <ToolbarTemplate>
+                <DxToolbar>
+                    <DxToolbarItem>
+                        <Template Context="toolbar_item_context">
+                            <div class="d-flex align-items-center me-2">
+                                <span class="me-2">Similarity Factor:</span>
+                                <DxSpinEdit @bind-Value="CurrentSimilarity"
+                                            @bind-Value:after="RefreshData"
+                                            Mask="0.00"
+                                            BindValueMode="BindValueMode.OnInput"
+                                            MaxValue="1"
+                                            MinValue="0"
+                                            Increment="0.05F" />
+                            </div>
+                        </Template>
+                    </DxToolbarItem>
+                    <DxToolbarItem Alignment="ToolbarItemAlignment.Right">
+                        <Template Context="toolbar_item_context">
+                            <DxSearchBox @bind-Text="CurrentSearchText"
+                                         @bind-Text:after="RefreshData"
+                                         InputDelay="500"
+                                         BindValueMode="BindValueMode.OnDelayedInput"
+                                         NullText="Try: clothing"
+                                         ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                        </Template>
+                    </DxToolbarItem>
+                </DxToolbar>
+            </ToolbarTemplate>
+        </DxGrid>
+    </DxLoadingPanel>
+</div>
+
+@code {
+    private string CurrentSearchText { get; set; } = string.Empty;
+    private float CurrentSimilarity { get; set; } = 0.31f;
+    private IList<DictionaryEntry> OriginalDictionaryEntries { get; set; } = [];
+    private IList<DictionaryEntry> DictionaryEntries { get; set; } = [];
+    private bool LoadingPanelVisible { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        OriginalDictionaryEntries = DictionaryEntryDataProvider.GenerateData();
+        DictionaryEntries = OriginalDictionaryEntries;
+        await FilterProvider.FillCacheAsync(OriginalDictionaryEntries.Select(GetItemDescription));
+        LoadingPanelVisible = false;
+    }
+
+    private async Task RefreshData()
+    {
+        var searchText = CurrentSearchText;
+        var similarity = CurrentSimilarity;
+        if (string.IsNullOrEmpty(searchText))
+        {
+            DictionaryEntries = OriginalDictionaryEntries;
+            return;
+        }
+
+        await FilterProvider.FillCacheAsync([searchText]);
+        
+        var entries = OriginalDictionaryEntries
+                .Select(item => new
+                {
+                    Entry = item,
+                    Similarity = FilterProvider.GetSimilarity(GetItemDescription(item), searchText),
+                })
+                .OrderByDescending(x => x.Similarity)
+                .Where(x => x.Similarity > similarity)
+                .Select(x => x.Entry)
+                .ToList();
+
+        if (CurrentSearchText != searchText || CurrentSimilarity != similarity)
+            return;
+
+        DictionaryEntries = entries;
+    }
+
+    private string GetItemDescription(DictionaryEntry item) => $"{item.Name} - {item.Description}";
+}

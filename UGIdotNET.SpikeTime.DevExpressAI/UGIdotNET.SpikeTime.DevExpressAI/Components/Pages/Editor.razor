@@ -1,0 +1,26 @@
+﻿@page "/editor"
+@using DevExpress.AIIntegration.Blazor.HtmlEditor
+
+<PageTitle>Editor</PageTitle>
+
+<h1>Editor</h1>
+
+<DxHtmlEditor Markup="@markup">
+    <AdditionalItems>
+        <SummarizeAIToolbarItem />
+        <ExpandAIToolbarItem />
+        <ExplainAIToolbarItem />
+        <AskAssistantAIToolbarItem />
+        <ChangeStyleAIToolbarItem />
+        <ChangeToneAIToolbarItem />
+        <ProofreadAIToolbarItem />
+        <ShortenAIToolbarItem />
+        <TranslateAIToolbarItem Languages="@languages" />
+    </AdditionalItems>
+</DxHtmlEditor>
+
+@code {
+    private string? markup;
+
+    private string[] languages = ["English", "Italian", "Japanese"];
+}
