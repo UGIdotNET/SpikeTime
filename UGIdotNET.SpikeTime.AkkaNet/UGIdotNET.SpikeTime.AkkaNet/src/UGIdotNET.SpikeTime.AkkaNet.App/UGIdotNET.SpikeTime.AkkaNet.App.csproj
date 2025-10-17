@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Akka.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
   </ItemGroup>
 
 </Project>
