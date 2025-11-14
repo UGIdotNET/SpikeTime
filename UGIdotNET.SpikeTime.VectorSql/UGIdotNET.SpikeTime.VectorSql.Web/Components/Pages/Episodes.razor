@@ -1,0 +1,67 @@
+﻿@page "/episodes"
+@rendermode InteractiveServer
+
+@inject EpisodeService EpisodeService
+
+<h1>Episodes</h1>
+
+@*<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-outline-primary" @onclick="CreateEpisodesAsync">Create episodes</button>
+    </div>
+</div>*@
+
+
+<EditForm Model="query" class="row" OnValidSubmit="SearchAsync">
+    <div class="col-md-3">
+        <InputText class="form-control" @bind-Value="query.Topic" placeholder="type a topic" />
+    </div>
+    <div class="col-md-7">
+        <InputText class="form-control" @bind-Value="query.Text" placeholder="Search..." />
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</EditForm>
+
+<hr />
+@if (episodes.Length > 0)
+{
+    <div class="row">
+        @foreach (var episode in episodes)
+        {
+            <div class="col-md-4 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@episode.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@episode.Distance</h6>
+                        <p class="card-text">
+                            @episode.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private QueryModel query = new();
+
+    private EpisodeListItem[] episodes = [];
+
+    private async Task CreateEpisodesAsync()
+        => await EpisodeService.SeedEpisodesAsync();
+
+    private async Task SearchAsync()
+    {
+        episodes = await EpisodeService.SearchEpisodesAsync(query.Text, query.Topic);
+    }
+
+    public class QueryModel
+    {
+        public string Text { get; set; } = string.Empty;
+
+        public string Topic { get; set; } = string.Empty;
+    }
+}

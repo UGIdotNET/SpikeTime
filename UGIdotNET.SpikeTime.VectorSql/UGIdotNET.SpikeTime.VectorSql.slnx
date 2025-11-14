@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.VectorSql.Data/UGIdotNET.SpikeTime.VectorSql.Data.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.VectorSql.Web/UGIdotNET.SpikeTime.VectorSql.Web.csproj" />
+</Solution>
