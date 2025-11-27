@@ -1,0 +1,98 @@
+﻿@page "/"
+
+@inject QdrantClient Qdrant
+@inject IEmbeddingGenerator<string, Embedding<float>> EmbeddingGenerator
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<hr />
+
+<div class="row">
+    @if (dataImported.HasValue)
+    {
+        <div class="col-md-12 alert @(dataImported.Value ? "alert-success" : "alert-danger")">
+            @importDataMessage
+        </div>
+    }
+    else
+    {
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary" @onclick="SeedDataAsync">Seed data</button>
+        </div>
+    }
+</div>
+
+@code {
+    private bool? collectionCreated;
+    private string? message;
+
+    private bool? dataImported;
+    private string? importDataMessage;
+
+    private async Task SeedDataAsync()
+    {
+        try
+        {
+            await CreateCollectionAsync();
+            await ImportDataAsync();
+
+            dataImported = true;
+            importDataMessage = "Data imported correctly!";
+        }
+        catch (Exception ex)
+        {
+            dataImported = false;
+            message = ex.Message;
+        }
+    }
+
+    private async Task CreateCollectionAsync()
+    {
+        await Qdrant.RecreateCollectionAsync(
+            "spiketime_espisodes",
+            new VectorParams { Size = 1536, Distance = Distance.Cosine });
+
+        collectionCreated = true;
+        message = "Collection created!";
+    }
+
+    private async Task ImportDataAsync()
+    {
+        var episodesContent = System.IO.File.ReadAllText("episodi.json");
+
+        var episodesList = System.Text.Json.JsonSerializer.Deserialize<EpisodeListModel>(
+            episodesContent,
+            new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true })?.Episodes ?? [];
+
+        var points = new List<PointStruct>();
+        for (int i = 0; i < episodesList.Count; i++)
+        {
+            var episode = episodesList[i];
+
+            string embeddingText = $"{episode.Title}\r\n{episode.Description}";
+            var embeddings = await EmbeddingGenerator.GenerateVectorAsync(embeddingText);
+
+            var id = i + 1;
+
+            var point = new PointStruct
+            {
+                Id = (ulong)id,
+                Vectors = embeddings.ToArray(),
+                Payload =
+                {
+                    ["title"] = episode.Title,
+                    ["description"] = episode.Description
+                }
+            };
+
+            points.Add(point);
+        }
+
+        var result = await Qdrant.UpsertAsync("spiketime_espisodes", points);
+    }
+
+}

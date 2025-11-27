@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.QdrantApp.AppHost/UGIdotNET.SpikeTime.QdrantApp.AppHost.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.QdrantApp.ServiceDefaults/UGIdotNET.SpikeTime.QdrantApp.ServiceDefaults.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.QdrantApp/UGIdotNET.SpikeTime.QdrantApp.csproj" />
+</Solution>

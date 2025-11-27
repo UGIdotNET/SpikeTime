@@ -1,0 +1,88 @@
+﻿@page "/search"
+
+@using QdrantRange = Qdrant.Client.Grpc.Range;
+@using Microsoft.SemanticKernel.Connectors.Qdrant;
+
+@inject QdrantClient Qdrant
+@inject QdrantVectorStore VectorStore
+@inject QdrantCollection<ulong, Episode> Collection
+@inject IEmbeddingGenerator<string, Embedding<float>> EmbeddingGenerator
+
+<PageTitle>Search</PageTitle>
+
+<h1>Search</h1>
+
+<EditForm Model="query" class="row" OnValidSubmit="SearchAsync">
+    <div class="col-md-10">
+        <InputText class="form-control" @bind-Value="query.Text" placeholder="Search..." />
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</EditForm>
+
+<hr />
+@if (episodes.Count > 0)
+{
+    <div class="row">
+        @foreach (var episode in episodes)
+        {
+            <div class="col-md-4 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@episode.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@episode.Score</h6>
+                        <p class="card-text">
+                            @episode.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private QueryModel query = new();
+
+    private List<EpisodeListItem> episodes = [];
+
+    private async Task SearchAsync()
+    {
+        episodes = [];
+
+        var embedding = await EmbeddingGenerator.GenerateVectorAsync(query.Text);
+
+        //var collection = VectorStore.GetCollection<ulong, Episode>("spiketime_espisodes");
+        //if (collection is not null)
+        {
+            var searchResult = Collection.SearchAsync(embedding, 6);
+            await foreach (var result in searchResult)
+            {
+                episodes.Add(new EpisodeListItem(
+                    result.Record.Title,
+                    result.Record.Description,
+                    result.Score ?? 0));
+            }
+        }
+
+        //var points = await Qdrant.SearchAsync(
+        //    "spiketime_espisodes",
+        //    embedding,
+        //    limit: 6);
+
+        //if (points is not null and { Count: > 0 })
+        //{
+        //    episodes = points.Select(p => new EpisodeListItem(
+        //        p.Payload["title"].StringValue,
+        //        p.Payload["description"].StringValue,
+        //        p.Score)).ToList();
+        //}
+    }
+
+    public class QueryModel
+    {
+        public string Topic { get; set; } = string.Empty;
+        public string Text { get; set; } = string.Empty;
+    }
+}

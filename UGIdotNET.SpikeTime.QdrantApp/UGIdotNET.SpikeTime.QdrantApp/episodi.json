@@ -1,0 +1,172 @@
+{
+  "episodes": [
+    {
+      "title": "1. Full Stack UI con Blazor e .NET 8",
+      "description": "In questo episodio esploriamo per la prima volta le potenzialità di Blazor in .NET 8 per la creazione di applicazioni full stack. Attraverso del codice dal vivo, scopriamo come costruire interfacce utente interattive sia lato client che server, sfruttando le nuove funzionalità introdotte in questa versione del framework."
+    },
+    {
+      "title": "2. Identity API in .NET 8",
+      "description": "Proviamo insieme le nuove Identity API introdotte in .NET 8. Durante questa sessione di live coding, implementiamo da zero un sistema di autenticazione e autorizzazione, esplorando le funzionalità moderne per la gestione delle identità degli utenti nelle nostre applicazioni."
+    },
+    {
+      "title": "3. AWS da zero con .NET",
+      "description": "Primo approccio con Amazon Web Services utilizzando .NET. In questo episodio sperimentiamo dal vivo come configurare l'ambiente AWS, creare le prime risorse cloud e integrare i servizi AWS nelle nostre applicazioni .NET, partendo completamente da zero."
+    },
+    {
+      "title": "4. Proviamo Data API Builder",
+      "description": "Scopriamo Data API Builder, lo strumento Microsoft per generare automaticamente API REST e GraphQL da database. Durante questa sessione di live coding, configuriamo il tool per la prima volta e creiamo API pronte all'uso partendo da un database esistente."
+    },
+    {
+      "title": "5. Cloud Native con .NET Aspire",
+      "description": "Esploriamo .NET Aspire, il nuovo stack per lo sviluppo di applicazioni cloud-native. In questo episodio proviamo dal vivo a creare un'architettura distribuita, sfruttando le funzionalità di orchestrazione e osservabilità offerte da questo framework innovativo."
+    },
+    {
+      "title": "6. Caching senza segreti con FusionCache",
+      "description": "Proviamo FusionCache, la libreria avanzata per la gestione della cache in .NET. Durante questa sessione di live coding, implementiamo strategie di caching multi-livello, esploriamo le funzionalità di fail-safe e scopriamo come ottimizzare le performance delle nostre applicazioni."
+    },
+    {
+      "title": "7. Entity Framework Core in .NET 8",
+      "description": "Esploriamo le novità di Entity Framework Core in .NET 8. In questo episodio sperimentiamo dal vivo le nuove funzionalità dell'ORM Microsoft, tra cui miglioramenti delle performance, nuove modalità di query e funzionalità avanzate per la gestione dei dati."
+    },
+    {
+      "title": "8. Azure AI Document Intelligence",
+      "description": "Primo approccio con Azure AI Document Intelligence per l'estrazione intelligente di dati dai documenti. Durante questa sessione di live coding, integriamo il servizio in un'applicazione .NET e testiamo le capacità di OCR e analisi documentale basate su intelligenza artificiale."
+    },
+    {
+      "title": "9. Serverless con AWS Lambda",
+      "description": "Scopriamo l'architettura serverless con AWS Lambda e .NET. In questo episodio creiamo e deployamo dal vivo le nostre prime funzioni Lambda, esplorando i vantaggi dell'esecuzione di codice senza dover gestire server e infrastruttura."
+    },
+    {
+      "title": "10. Microservices con Azure Container Apps",
+      "description": "Proviamo Azure Container Apps per la creazione di architetture a microservizi. Durante questa sessione di live coding, realizziamo un sistema distribuito containerizzato, sfruttando le funzionalità di scaling automatico e gestione semplificata offerte da questo servizio Azure."
+    },
+    {
+      "title": "11. Proviamo FastEndpoints",
+      "description": "Esploriamo FastEndpoints, l'alternativa leggera e performante ai controller tradizionali in .NET. In questo episodio sperimentiamo dal vivo come creare API REST veloci e organizzate, scoprendo i vantaggi di questo approccio moderno allo sviluppo di endpoint."
+    },
+    {
+      "title": "12. BDD in .NET con SpecFlow",
+      "description": "Primo approccio al Behavior-Driven Development utilizzando SpecFlow. Durante questa sessione di live coding, scriviamo i nostri primi test in formato Gherkin e implementiamo le specifiche comportamentali, esplorando come migliorare la comunicazione tra sviluppatori e stakeholder."
+    },
+    {
+      "title": "13. Misurare le performance con Benchmark.NET",
+      "description": "Scopriamo BenchmarkDotNet, la libreria per il benchmarking preciso del codice .NET. In questo episodio creiamo dal vivo i nostri primi benchmark, impariamo a misurare le performance del codice e a identificare i colli di bottiglia nelle nostre applicazioni."
+    },
+    {
+      "title": "14. Actor Model con Akka.NET",
+      "description": "Proviamo il paradigma Actor Model utilizzando Akka.NET. Durante questa sessione di live coding, costruiamo un sistema basato su attori, esplorando la gestione della concorrenza e della distribuzione in modo completamente nuovo rispetto alla programmazione tradizionale."
+    },
+    {
+      "title": "15. Autenticazione con AWS Cognito",
+      "description": "Esploriamo AWS Cognito per la gestione dell'autenticazione e delle identità utente. In questo episodio integriamo dal vivo Cognito in un'applicazione .NET, configurando pool di utenti e implementando flussi di login sicuri nel cloud AWS."
+    },
+    {
+      "title": "16. Blazor UI: proviamo Fluent UI",
+      "description": "Primo approccio con Fluent UI per Blazor, il sistema di design Microsoft. Durante questa sessione di live coding, costruiamo interfacce utente moderne e accessibili, sfruttando i componenti pronti all'uso che seguono le linee guida del design system di Microsoft."
+    },
+    {
+      "title": "17. Blazor UI: proviamo Radzen",
+      "description": "Scopriamo Radzen Blazor Components, una ricca libreria di componenti UI per Blazor. In questo episodio esploriamo dal vivo la suite di controlli disponibili, creando interfacce complesse e professionali con griglia dati, form e grafici interattivi."
+    },
+    {
+      "title": "18. Blazor UI: proviamo Blazorise",
+      "description": "Proviamo Blazorise, il framework di componenti UI per Blazor che supporta multiple librerie CSS. Durante questa sessione di live coding, realizziamo un'interfaccia utente responsive e moderna, esplorando le funzionalità e la flessibilità di questa libreria open source."
+    },
+    {
+      "title": "19. NoSQL con Amazon DynamoDB",
+      "description": "Esploriamo Amazon DynamoDB, il database NoSQL serverless di AWS. In questo episodio sperimentiamo dal vivo la modellazione dei dati non relazionali, le operazioni CRUD e le strategie di partizionamento, integrando DynamoDB in un'applicazione .NET."
+    },
+    {
+      "title": "20. NoSQL con Azure Cosmos DB",
+      "description": "Primo approccio con Azure Cosmos DB, il database multimodello distribuito globalmente. Durante questa sessione di live coding, creiamo un database NoSQL, esploriamo le diverse API disponibili e implementiamo operazioni di lettura e scrittura ad alte performance."
+    },
+    {
+      "title": "21. NoSQL con MongoDB Atlas",
+      "description": "Scopriamo MongoDB Atlas, la piattaforma cloud per database MongoDB. In questo episodio configuriamo dal vivo un cluster, modelliamo documenti JSON e integriamo MongoDB in un'applicazione .NET, esplorando le query e le aggregazioni nei database documentali."
+    },
+    {
+      "title": "22. Blazor State Management con Fluxor",
+      "description": "Proviamo Fluxor, la libreria per lo state management in Blazor basata sul pattern Flux/Redux. Durante questa sessione di live coding, implementiamo una gestione centralizzata dello stato dell'applicazione, con azioni, reducer e effetti collaterali prevedibili."
+    },
+    {
+      "title": "23. AI con Claude su AWS",
+      "description": "Esploriamo Claude, il modello di intelligenza artificiale di Anthropic, integrato nei servizi AWS. In questo episodio sperimentiamo dal vivo come utilizzare Claude tramite Amazon Bedrock per creare applicazioni .NET potenziate dall'AI generativa."
+    },
+    {
+      "title": "24. AI con Llama su Azure",
+      "description": "Primo approccio con Llama, il modello di linguaggio open source di Meta, deployato su Azure. Durante questa sessione di live coding, integriamo Llama in un'applicazione .NET sfruttando i servizi Azure AI per generare testo e costruire chatbot intelligenti."
+    },
+    {
+      "title": "25. AI con Claude su AWS (reprise)",
+      "description": "Torniamo ad esplorare Claude su AWS con nuovi scenari e approfondimenti. In questo episodio sperimentiamo dal vivo casi d'uso avanzati dell'AI di Anthropic, scoprendo ulteriori possibilità di integrazione con Amazon Bedrock nelle nostre applicazioni .NET."
+    },
+    {
+      "title": "26. Proviamo Microsoft.Extensions.AI",
+      "description": "Scopriamo Microsoft.Extensions.AI, il nuovo framework unificato per l'integrazione di AI in .NET. Durante questa sessione di live coding, esploriamo le astrazioni che permettono di lavorare con diversi provider di AI in modo standardizzato e intercambiabile."
+    },
+    {
+      "title": "27. Proviamo Semantic Kernel",
+      "description": "Esploriamo Semantic Kernel, l'SDK Microsoft per orchestrare l'AI nelle applicazioni. In questo episodio sperimentiamo dal vivo come creare plugin, gestire prompt e combinare modelli di linguaggio con il codice tradizionale per costruire applicazioni intelligenti."
+    },
+    {
+      "title": "28. .NET Aspire in .NET 9",
+      "description": "Primo approccio con le novità di .NET Aspire nella versione .NET 9. Durante questa sessione di live coding, esploriamo i miglioramenti e le nuove funzionalità per lo sviluppo cloud-native, testando l'evoluzione di questo stack per applicazioni distribuite."
+    },
+    {
+      "title": "29. .NET Aspire on Azure",
+      "description": "Proviamo il deployment di applicazioni .NET Aspire su Azure. In questo episodio sperimentiamo dal vivo come portare in produzione un'architettura cloud-native su Azure, sfruttando i servizi PaaS e l'integrazione nativa con la piattaforma Microsoft."
+    },
+    {
+      "title": "30. .NET Aspire on AWS",
+      "description": "Scopriamo come deployare .NET Aspire su Amazon Web Services. Durante questa sessione di live coding, esploriamo le strategie per portare applicazioni cloud-native basate su Aspire nell'ecosistema AWS, utilizzando servizi come ECS e altri strumenti di orchestrazione."
+    },
+    {
+      "title": "31. Autenticazione con OpenIddict",
+      "description": "Esploriamo OpenIddict, la libreria open source per implementare server OAuth 2.0 e OpenID Connect in .NET. In questo episodio creiamo dal vivo un identity provider personalizzato, gestendo flussi di autenticazione moderni e sicuri."
+    },
+    {
+      "title": "32. Autenticazione con Auth0",
+      "description": "Primo approccio con Auth0, la piattaforma di Identity-as-a-Service. Durante questa sessione di live coding, integriamo Auth0 in un'applicazione .NET, configurando login social, multi-factor authentication e gestione completa delle identità esternalizzata."
+    },
+    {
+      "title": "33. Autenticazione con Easy Auth",
+      "description": "Proviamo Easy Auth, il sistema di autenticazione integrato in Azure App Service. In questo episodio sperimentiamo dal vivo come attivare l'autenticazione senza scrivere codice, configurando provider di identità e proteggendo le nostre applicazioni web con pochi click."
+    },
+    {
+      "title": "34. IaC su AWS con AWS Cloudformation",
+      "description": "Scopriamo AWS CloudFormation per l'Infrastructure as Code su Amazon Web Services. Durante questa sessione di live coding, scriviamo i nostri primi template per definire e deployare risorse AWS in modo dichiarativo, automatizzando la creazione dell'infrastruttura."
+    },
+    {
+      "title": "35. IaC su Azure con Bicep",
+      "description": "Esploriamo Bicep, il linguaggio DSL di Microsoft per l'Infrastructure as Code su Azure. In questo episodio scriviamo dal vivo template Bicep per definire risorse Azure in modo semplice e leggibile, gestendo l'infrastruttura come codice versionabile."
+    },
+    {
+      "title": "36. IaC con Terraform",
+      "description": "Primo approccio con Terraform, lo strumento multi-cloud per l'Infrastructure as Code. Durante questa sessione di live coding, creiamo configurazioni Terraform per deployare risorse su diversi cloud provider, esplorando le potenzialità di questo tool standard del settore."
+    },
+    {
+      "title": "37. Messaging con Amazon SNS",
+      "description": "Proviamo Amazon SNS (Simple Notification Service) per sistemi di messaging pub/sub su AWS. In questo episodio integriamo dal vivo SNS in un'applicazione .NET, implementando pattern di comunicazione asincrona e notifiche distribuite nel cloud."
+    },
+    {
+      "title": "38. Messaging con Azure Service Bus",
+      "description": "Scopriamo Azure Service Bus, il servizio di messaging enterprise di Microsoft. Durante questa sessione di live coding, implementiamo code, topic e subscription per la comunicazione affidabile tra servizi distribuiti, gestendo messaggi in scenari complessi."
+    },
+    {
+      "title": "39. AI nel frontend: .NET Smart Components",
+      "description": "Esploriamo .NET Smart Components, i componenti UI potenziati dall'intelligenza artificiale. In questo episodio integriamo dal vivo funzionalità AI direttamente nell'interfaccia utente, creando esperienze intelligenti come autocompletamento semantico e suggerimenti contestuali."
+    },
+    {
+      "title": "40. AI nel frontend: Telerik per Blazor",
+      "description": "Primo approccio con le funzionalità AI nei componenti Telerik per Blazor. Durante questa sessione di live coding, esploriamo come i controlli Telerik integrano l'intelligenza artificiale per migliorare l'esperienza utente con funzionalità smart e assistenti virtuali."
+    },
+    {
+      "title": "41. AI nel frontend: DevExpress per Blazor",
+      "description": "Proviamo le capacità AI dei componenti DevExpress per Blazor. In questo episodio sperimentiamo dal vivo l'integrazione dell'intelligenza artificiale nei controlli UI DevExpress, scoprendo funzionalità innovative per interfacce utente più intelligenti e reattive."
+    },
+    {
+      "title": "42. Ricerche semantiche con OpenSearch",
+      "description": "Scopriamo OpenSearch per implementare ricerche semantiche avanzate. Durante questa sessione di live coding, configuriamo OpenSearch, indicizziamo documenti e implementiamo query intelligenti che comprendono il significato delle ricerche oltre le semplici keyword match."
+    }
+  ]
+}
