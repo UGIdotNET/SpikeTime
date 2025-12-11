@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.Passkeys.AppHost/UGIdotNET.SpikeTime.Passkeys.AppHost.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Passkeys.ServiceDefaults/UGIdotNET.SpikeTime.Passkeys.ServiceDefaults.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Passkeys/UGIdotNET.SpikeTime.Passkeys.Client/UGIdotNET.SpikeTime.Passkeys.Client.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Passkeys/UGIdotNET.SpikeTime.Passkeys/UGIdotNET.SpikeTime.Passkeys.csproj" />
+</Solution>
