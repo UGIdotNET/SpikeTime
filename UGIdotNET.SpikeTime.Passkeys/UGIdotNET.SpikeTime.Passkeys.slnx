@@ -3,4 +3,6 @@
   <Project Path="UGIdotNET.SpikeTime.Passkeys.ServiceDefaults/UGIdotNET.SpikeTime.Passkeys.ServiceDefaults.csproj" />
   <Project Path="UGIdotNET.SpikeTime.Passkeys/UGIdotNET.SpikeTime.Passkeys.Client/UGIdotNET.SpikeTime.Passkeys.Client.csproj" />
   <Project Path="UGIdotNET.SpikeTime.Passkeys/UGIdotNET.SpikeTime.Passkeys/UGIdotNET.SpikeTime.Passkeys.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Passkeys9/UGIdotNET.SpikeTime.Passkeys9.Client/UGIdotNET.SpikeTime.Passkeys9.Client.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Passkeys9/UGIdotNET.SpikeTime.Passkeys9/UGIdotNET.SpikeTime.Passkeys9.csproj" />
 </Solution>
