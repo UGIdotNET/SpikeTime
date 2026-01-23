@@ -1,0 +1,15 @@
+{
+  "inputs": [],
+  "servers": {
+    "SpikeTimeMcpServer": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "UGIdotNET.SpikeTime.McpServer/UGIdotNET.SpikeTime.McpServer.csproj"
+      ],
+      "env": {}
+    }
+  }
+}

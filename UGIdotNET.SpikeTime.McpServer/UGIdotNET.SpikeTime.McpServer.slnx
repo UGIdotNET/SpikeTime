@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".mcp.json" />
+  </Folder>
+  <Project Path="UGIdotNET.SpikeTime.McpClient/UGIdotNET.SpikeTime.McpClient.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.McpServer/UGIdotNET.SpikeTime.McpServer.csproj" />
+</Solution>
