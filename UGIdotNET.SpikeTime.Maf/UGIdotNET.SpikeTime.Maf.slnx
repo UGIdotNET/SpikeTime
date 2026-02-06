@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.Maf.AppHost/UGIdotNET.SpikeTime.Maf.AppHost.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Maf.ServiceDefaults/UGIdotNET.SpikeTime.Maf.ServiceDefaults.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Maf.Web/UGIdotNET.SpikeTime.Maf.Web.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Maf.Writer/UGIdotNET.SpikeTime.Maf.Writer.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Maf/UGIdotNET.SpikeTime.Maf.csproj" />
+</Solution>

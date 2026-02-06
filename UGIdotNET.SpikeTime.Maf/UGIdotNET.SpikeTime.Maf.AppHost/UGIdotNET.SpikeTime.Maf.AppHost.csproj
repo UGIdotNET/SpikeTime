@@ -1,0 +1,16 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.Maf.Web\UGIdotNET.SpikeTime.Maf.Web.csproj" />
+    <ProjectReference Include="..\UGIdotNET.SpikeTime.Maf.Writer\UGIdotNET.SpikeTime.Maf.Writer.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>6fd4ca42-ed78-4eff-be25-fb619f2791c1</UserSecretsId>
+  </PropertyGroup>
+
+</Project>
