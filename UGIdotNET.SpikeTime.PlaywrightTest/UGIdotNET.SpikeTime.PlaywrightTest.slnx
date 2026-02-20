@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.PlaywrightApp/UGIdotNET.SpikeTime.PlaywrightApp.Client/UGIdotNET.SpikeTime.PlaywrightApp.Client.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.PlaywrightApp/UGIdotNET.SpikeTime.PlaywrightApp/UGIdotNET.SpikeTime.PlaywrightApp.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.PlaywrightConsole/UGIdotNET.SpikeTime.PlaywrightConsole.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.PlaywrightTest/UGIdotNET.SpikeTime.PlaywrightTest.csproj" />
+</Solution>
