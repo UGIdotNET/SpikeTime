@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.Kurrent.AppHost/UGIdotNET.SpikeTime.Kurrent.AppHost.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.Kurrent.ServiceDefaults/UGIdotNET.SpikeTime.Kurrent.ServiceDefaults.csproj" Id="7d11e5b7-4148-49cf-b5dd-d1d78ea50700" />
+  <Project Path="UGIdotNET.SpikeTime.Kurrent/UGIdotNET.SpikeTime.Kurrent.csproj" />
+</Solution>
