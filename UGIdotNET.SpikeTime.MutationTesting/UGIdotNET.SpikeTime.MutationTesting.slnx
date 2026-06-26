@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="UGIdotNET.SpikeTime.MutationTesting.AppHost/UGIdotNET.SpikeTime.MutationTesting.AppHost.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.MutationTesting.Data/UGIdotNET.SpikeTime.MutationTesting.Data.csproj" Id="f0fb7d43-d7dc-4c1f-8606-648d5348b813" />
+  <Project Path="UGIdotNET.SpikeTime.MutationTesting.Migrations/UGIdotNET.SpikeTime.MutationTesting.Migrations.csproj" />
+  <Project Path="UGIdotNET.SpikeTime.MutationTesting.ServiceDefaults/UGIdotNET.SpikeTime.MutationTesting.ServiceDefaults.csproj" Id="1cbb6009-d103-4370-b954-965d528c984f" />
+  <Project Path="UGIdotNET.SpikeTime.MutationTesting.Test/UGIdotNET.SpikeTime.MutationTesting.Test.csproj" Id="e1cd7934-91f5-4e27-a0f9-5596edc63e01" />
+  <Project Path="UGIdotNET.SpikeTime.MutationTesting/UGIdotNET.SpikeTime.MutationTesting.csproj" />
+</Solution>

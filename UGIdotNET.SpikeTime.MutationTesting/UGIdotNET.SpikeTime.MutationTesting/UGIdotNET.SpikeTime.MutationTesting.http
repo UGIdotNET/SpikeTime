@@ -1,0 +1,6 @@
+@UGIdotNET.SpikeTime.MutationTesting_HostAddress = http://localhost:5043
+
+GET {{UGIdotNET.SpikeTime.MutationTesting_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
