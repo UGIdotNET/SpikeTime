@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+**/.astro/
+.vs/
+.vscode/
+*.user
+*.suo

@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="VideoCatalog.AdminApi/VideoCatalog.AdminApi.csproj" />
+  <Project Path="VideoCatalog.AdminPortal/VideoCatalog.AdminPortal.csproj" />
+  <Project Path="VideoCatalog.AppHost/VideoCatalog.AppHost.csproj" />
+  <Project Path="VideoCatalog.PublicApi/VideoCatalog.PublicApi.csproj" />
+  <Project Path="VideoCatalog.ServiceDefaults/VideoCatalog.ServiceDefaults.csproj" />
+</Solution>

@@ -1,0 +1,212 @@
+---
+interface Video {
+  id: number;
+  title: string;
+  description: string;
+  url: string;
+  platform: string;
+  averageRating: number;
+  ratingsCount: number;
+}
+
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL || "http://localhost:5048";
+let videos: Video[] = [];
+let catalogUnavailable = false;
+
+try {
+  const response = await fetch(`${apiBaseUrl}/api/public/videos`);
+  if (!response.ok) {
+    throw new Error(`Public API returned ${response.status}`);
+  }
+
+  videos = await response.json();
+} catch (error) {
+  catalogUnavailable = true;
+  console.error("Unable to load the video catalog.", error);
+}
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Catalogo video",
+  itemListElement: videos.map((video, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "VideoObject",
+      name: video.title,
+      description: video.description,
+      contentUrl: video.url,
+      aggregateRating: video.ratingsCount > 0
+        ? {
+            "@type": "AggregateRating",
+            ratingValue: video.averageRating,
+            ratingCount: video.ratingsCount,
+            bestRating: 5,
+            worstRating: 1,
+          }
+        : undefined,
+    },
+  })),
+};
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Catalogo pubblico di contenuti video con votazione anonima da 1 a 5." />
+    <meta property="og:title" content="Catalogo video" />
+    <meta property="og:description" content="Scopri e vota i contenuti video della community." />
+    <meta property="og:type" content="website" />
+    <title>Catalogo video</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f7fb;
+        --surface: #ffffff;
+        --text: #172033;
+        --muted: #5c6b83;
+        --line: #dfe7f3;
+        --primary: #2b5df5;
+        --primary-soft: #eaf1ff;
+        --success: #0d8a50;
+        --error: #a51d2d;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(--text); }
+      a { color: var(--primary); text-decoration: none; }
+      main { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+      header { margin-bottom: 2rem; }
+      h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0; }
+      h2 { margin: 0; }
+      .lead { color: var(--muted); margin-top: 0.75rem; max-width: 52rem; }
+      .badge { display: inline-block; background: var(--primary-soft); color: var(--primary); border-radius: 999px; padding: 0.35rem 0.7rem; font-size: 0.7rem; font-weight: 700; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+      .card { display: flex; flex-direction: column; gap: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 1.25rem; box-shadow: 0 12px 32px rgba(23, 32, 51, 0.06); }
+      .meta { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.82rem; }
+      .rating { font-size: 1.05rem; font-weight: 700; color: var(--success); }
+      .vote-form { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .vote-form label { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.35rem 0.5rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+      .vote-form button { border: none; border-radius: 10px; background: var(--primary); color: white; padding: 0.7rem 1rem; cursor: pointer; font-weight: 700; }
+      .vote-form button:disabled { cursor: wait; opacity: 0.65; }
+      .status { min-height: 1.25rem; margin: 0; color: var(--success); font-size: 0.9rem; }
+      .status.error, .empty.error { color: var(--error); }
+      .empty { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 1.5rem; }
+    </style>
+  </head>
+  <body>
+    <main data-api-base-url={apiBaseUrl}>
+      <header>
+        <span class="badge">Video catalog</span>
+        <h1>Scopri i contenuti video più apprezzati</h1>
+        <p class="lead">Un portale pubblico pensato per la scoperta e la valutazione anonima dei contenuti multimediali.</p>
+      </header>
+
+      {catalogUnavailable ? (
+        <p class="empty error">Il catalogo non è temporaneamente disponibile. Riprova tra poco.</p>
+      ) : videos.length === 0 ? (
+        <p class="empty">Non ci sono ancora contenuti pubblicati.</p>
+      ) : (
+        <section class="grid" aria-label="Contenuti video">
+          {videos.map((video) => (
+            <article class="card" data-video-id={video.id}>
+              <div><span class="badge">{video.platform}</span></div>
+              <h2>{video.title}</h2>
+              <p>{video.description}</p>
+              <div class="meta">
+                <span data-ratings-count>Voti: {video.ratingsCount}</span>
+                <span class="rating" data-average-rating>{Number(video.averageRating).toFixed(1)} / 5</span>
+              </div>
+              <a href={video.url} target="_blank" rel="noopener noreferrer">Apri video</a>
+              <form class="vote-form" data-vote-form>
+                <input type="hidden" name="videoId" value={video.id} />
+                {[1, 2, 3, 4, 5].map((rating) => (
+                  <label>
+                    <input type="radio" name={`rating-${video.id}`} value={rating} required={rating === 1} />
+                    {rating}
+                  </label>
+                ))}
+                <button type="submit">Vota</button>
+              </form>
+              <p class="status" data-vote-status aria-live="polite"></p>
+            </article>
+          ))}
+        </section>
+      )}
+    </main>
+
+    <script>
+      const main = document.querySelector("main[data-api-base-url]");
+      const apiBaseUrl = main?.getAttribute("data-api-base-url");
+
+      document.addEventListener("submit", async (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement) || !form.matches("[data-vote-form]") || !apiBaseUrl) {
+          return;
+        }
+
+        event.preventDefault();
+        const formData = new FormData(form);
+        const videoId = String(formData.get("videoId") ?? "");
+        const rating = Number(formData.get(`rating-${videoId}`));
+        const card = form.closest("[data-video-id]");
+        const status = card?.querySelector("[data-vote-status]");
+        const button = form.querySelector("button");
+
+        if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+          if (status) {
+            status.textContent = "Seleziona un voto da 1 a 5.";
+            status.classList.add("error");
+          }
+          return;
+        }
+
+        if (button instanceof HTMLButtonElement) {
+          button.disabled = true;
+        }
+        if (status) {
+          status.textContent = "Invio del voto...";
+          status.classList.remove("error");
+        }
+
+        try {
+          const response = await fetch(`${apiBaseUrl}/api/public/videos/${videoId}/ratings`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ rating }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Public API returned ${response.status}`);
+          }
+
+          const updatedVideo = await response.json();
+          const averageRating = card?.querySelector("[data-average-rating]");
+          const ratingsCount = card?.querySelector("[data-ratings-count]");
+
+          if (averageRating) {
+            averageRating.textContent = `${Number(updatedVideo.averageRating).toFixed(1)} / 5`;
+          }
+          if (ratingsCount) {
+            ratingsCount.textContent = `Voti: ${updatedVideo.ratingsCount}`;
+          }
+          if (status) {
+            status.textContent = "Voto registrato. Grazie!";
+          }
+          form.reset();
+        } catch {
+          if (status) {
+            status.textContent = "Impossibile inviare il voto. Riprova più tardi.";
+            status.classList.add("error");
+          }
+        } finally {
+          if (button instanceof HTMLButtonElement) {
+            button.disabled = false;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

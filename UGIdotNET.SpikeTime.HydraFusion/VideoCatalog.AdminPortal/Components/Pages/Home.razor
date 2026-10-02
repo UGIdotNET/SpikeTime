@@ -1,0 +1,190 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Authorization
+@using VideoCatalog.AdminPortal.Services
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject VideoAdminClient VideoAdminClient
+
+<PageTitle>Gestione contenuti video</PageTitle>
+
+<AuthorizeView Policy="VideoAdmin">
+    <Authorized Context="authContext">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>Gestione contenuti video</h1>
+                <p class="text-muted mb-0">
+                    Utente: <strong>@authContext.User.Identity?.Name</strong>.
+                    Inserisci nuovi contenuti da YouTube o altre piattaforme.
+                </p>
+            </div>
+            <form method="post" action="/logout">
+                <AntiforgeryToken />
+                <button type="submit" class="btn btn-outline-secondary">Logout</button>
+            </form>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(statusMessage))
+        {
+            <div class="alert alert-info">@statusMessage</div>
+        }
+
+        <EditForm Model="formModel" OnValidSubmit="SubmitVideoAsync">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">Titolo</label>
+                    <InputText @bind-Value="formModel.Title" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">URL video</label>
+                    <InputText @bind-Value="formModel.Url" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Descrizione</label>
+                    <InputTextArea @bind-Value="formModel.Description" class="form-control" rows="4" />
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" disabled="@isSubmitting">
+                @(isSubmitting ? "Salvataggio..." : "Aggiungi contenuto")
+            </button>
+        </EditForm>
+
+        <hr class="my-4" />
+
+        <h2>Contenuti pubblicati</h2>
+
+        @if (videos is null)
+        {
+            <p>Caricamento in corso...</p>
+        }
+        else if (videos.Count == 0)
+        {
+            <p>Nessun contenuto inserito.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Titolo</th>
+                            <th>Piattaforma</th>
+                            <th>Voto medio</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var video in videos)
+                        {
+                            <tr>
+                                <td>@video.Title</td>
+                                <td>@video.Platform</td>
+                                <td>@video.AverageRating.ToString("0.0") / 5</td>
+                                <td><a href="@video.Url" target="_blank" rel="noreferrer">Apri</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <AuthorizeView Context="authenticationContext">
+            <Authorized>
+                <div class="card mx-auto mt-5" style="max-width: 480px;">
+                    <div class="card-body">
+                        <h1 class="h3">Accesso negato</h1>
+                        <p class="text-muted">
+                            L'utente <strong>@authenticationContext.User.Identity?.Name</strong>
+                            non possiede il ruolo <code>video-admin</code>.
+                        </p>
+                        <form method="post" action="/logout">
+                            <AntiforgeryToken />
+                            <button type="submit" class="btn btn-outline-secondary w-100">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="card mx-auto mt-5" style="max-width: 480px;">
+                    <div class="card-body">
+                        <h1 class="h3">Accesso amministrazione</h1>
+                        <p class="text-muted">Accedi tramite Keycloak per pubblicare contenuti video.</p>
+                        <a class="btn btn-primary w-100" href="/login">Accedi con Keycloak</a>
+                    </div>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private readonly VideoFormModel formModel = new();
+    private IReadOnlyList<VideoItem>? videos;
+    private string? statusMessage;
+    private bool isSubmitting;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authenticationState.User.Identity?.IsAuthenticated == true
+            && authenticationState.User.IsInRole("video-admin"))
+        {
+            await LoadVideosAsync();
+        }
+    }
+
+    private async Task LoadVideosAsync()
+    {
+        try
+        {
+            videos = await VideoAdminClient.GetVideosAsync();
+        }
+        catch (Exception ex)
+        {
+            statusMessage = ex.Message;
+        }
+    }
+
+    private async Task SubmitVideoAsync()
+    {
+        isSubmitting = true;
+        try
+        {
+            await VideoAdminClient.CreateVideoAsync(new CreateVideoRequest(
+                formModel.Title,
+                formModel.Description,
+                formModel.Url));
+
+            statusMessage = "Contenuto creato con successo.";
+            formModel.Title = string.Empty;
+            formModel.Description = string.Empty;
+            formModel.Url = string.Empty;
+            await LoadVideosAsync();
+        }
+        catch (Exception ex)
+        {
+            statusMessage = ex.Message;
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+
+    public class VideoFormModel
+    {
+        [Required]
+        public string Title { get; set; } = string.Empty;
+
+        [Required]
+        public string Url { get; set; } = string.Empty;
+
+        [Required]
+        public string Description { get; set; } = string.Empty;
+    }
+}
