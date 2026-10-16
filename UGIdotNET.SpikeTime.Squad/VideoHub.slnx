@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="VideoHub.Api/VideoHub.Api.csproj" />
+  <Project Path="VideoHub.Api.Tests/VideoHub.Api.Tests.csproj" />
+  <Project Path="VideoHub.Data/VideoHub.Data.csproj" />
+  <Project Path="VideoHub.Web/VideoHub.Web.csproj" />
+  <Project Path="VideoHub.ServiceDefaults/VideoHub.ServiceDefaults.csproj" />
+</Solution>
+
+

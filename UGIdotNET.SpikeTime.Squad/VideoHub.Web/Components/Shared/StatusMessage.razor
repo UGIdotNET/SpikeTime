@@ -1,0 +1,10 @@
+@* Renders Blazor SSR validation + API errors consistently. *@
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert @(IsSuccess ? "alert-ok" : "alert-error")" role="@(IsSuccess ? "status" : "alert")">@Message</div>
+}
+
+@code {
+    [Parameter] public string? Message { get; set; }
+    [Parameter] public bool IsSuccess { get; set; }
+}

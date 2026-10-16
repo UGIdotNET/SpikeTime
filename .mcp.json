@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "squad_state": {
+      "command": "C:\\Users\\albim\\AppData\\Local\\Microsoft\\WinGet\\Packages\\bradygaster.Squad_Microsoft.Winget.Source_8wekyb3d8bbwe\\squad-win32-x64\\squad.exe",
+      "args": [
+        "state-mcp"
+      ],
+      "env": {},
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@page "/admin/videos/new"
+@page "/admin/videos/{Id:guid}/edit"
+@attribute [Authorize(Roles = "Admin")]
+@inject VideoHubApiClient Api
+@inject NavigationManager Nav
+
+<PageTitle>@(IsEdit ? "Modifica video" : "Nuovo video") - VideoHub</PageTitle>
+<h1>@(IsEdit ? "Modifica video" : "Nuovo video")</h1>
+
+@if (notFound)
+{
+    <p>Video non trovato. <a href="/admin">Torna alla gestione</a></p>
+}
+else
+{
+    <StatusMessage Message="@error" />
+    <EditForm Model="Form" FormName="video" OnValidSubmit="SaveAsync" Enhance>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="field">
+            <label for="title">Titolo</label>
+            <InputText id="title" @bind-Value="Form.Title" maxlength="200" />
+        </div>
+        <div class="field">
+            <label for="description">Descrizione</label>
+            <InputTextArea id="description" @bind-Value="Form.Description" rows="4" maxlength="2000" />
+        </div>
+        <div class="field">
+            <label for="url">Link al video (https YouTube o Vimeo)</label>
+            <InputText id="url" type="url" @bind-Value="Form.Url" maxlength="2000" />
+        </div>
+        <button type="submit">Salva</button>
+        <a href="/admin">Annulla</a>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+
+    [SupplyParameterFromForm(FormName = "video")] private VideoForm Form { get => form ??= new(); set => form = value; }
+    private VideoForm? form;
+
+    private bool notFound;
+    private string? error;
+
+    private bool IsEdit => Id is not null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id is { } id && Form.Title.Length == 0 && Form.Url.Length == 0)
+        {
+            var r = await Api.GetVideoAsync(id);
+            if (r.Value is { } v)
+            {
+                Form = new VideoForm { Title = v.Title, Description = v.Description, Url = v.Url };
+            }
+            else if (r.IsNotFound)
+            {
+                notFound = true;
+            }
+            else
+            {
+                error = r.Error;
+            }
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        var r = Id is { } id ? await Api.UpdateVideoAsync(id, Form) : await Api.CreateVideoAsync(Form);
+        if (r.IsSuccess)
+        {
+            Nav.NavigateTo("/admin");
+        }
+        else
+        {
+            error = r.Error;
+        }
+    }
+}

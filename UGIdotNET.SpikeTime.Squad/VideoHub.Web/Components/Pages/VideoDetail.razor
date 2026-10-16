@@ -1,0 +1,222 @@
+@page "/video/{Id:guid}"
+@inject VideoHubApiClient Api
+
+<PageTitle>@(video?.Title ?? "Video") - VideoHub</PageTitle>
+
+@if (notFound)
+{
+    <h1>Video non trovato</h1>
+    <p><a href="/">Torna all'elenco dei video</a></p>
+}
+else if (video is null)
+{
+    <StatusMessage Message="@loadError" />
+    <p><a href="/video/@Id">Riprova</a></p>
+}
+else
+{
+    <p><a href="/">&larr; Tutti i video</a></p>
+    <h1>@video.Title</h1>
+
+    @if (!string.IsNullOrEmpty(video.EmbedUrl))
+    {
+        <div class="player">
+            <iframe src="@video.EmbedUrl" title="@video.Title" loading="lazy" allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+    }
+    else
+    {
+        <p>Il video non può essere incorporato. <a href="@video.Url" target="_blank" rel="noopener noreferrer">Guardalo sul sito originale</a>.</p>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(video.Description))
+    {
+        <p class="description">@video.Description</p>
+    }
+
+    <section aria-labelledby="rating-title">
+        <h2 id="rating-title">Valutazione</h2>
+        <StarDisplay Average="average" Count="ratingCount" />
+        <StatusMessage Message="@ratingMessage" IsSuccess="ratingOk" />
+
+        @if (hasVoted)
+        {
+            <p>Grazie, hai già votato questo video. Il voto non può essere modificato.</p>
+        }
+        else if (voteStateUnknown)
+        {
+            <p class="muted">Impossibile verificare se hai già votato.</p>
+        }
+        else
+        {
+            <form method="post" @formname="rate" @onsubmit="RateAsync">
+                <AntiforgeryToken />
+                <fieldset class="rate">
+                    <legend>Il tuo voto (da 1 a 5 stelle, non modificabile)</legend>
+                    @for (var n = 1; n <= 5; n++)
+                    {
+                        <button type="submit" name="stars" value="@n" class="star-button"
+                                aria-label="@($"Vota {n} {(n == 1 ? "stella" : "stelle")} su 5")">
+                            <span aria-hidden="true">@n ★</span>
+                        </button>
+                    }
+                </fieldset>
+            </form>
+        }
+    </section>
+
+    <section aria-labelledby="comments-title">
+        <h2 id="comments-title">Commenti</h2>
+        @if (commentsError is not null)
+        {
+            <StatusMessage Message="@commentsError" />
+        }
+        else if (comments.Count == 0)
+        {
+            <p class="empty">Ancora nessun commento approvato. Scrivi tu il primo!</p>
+        }
+        else
+        {
+            <ul class="comments">
+                @foreach (var c in comments)
+                {
+                    <li class="card">
+                        <strong>@c.Author</strong>
+                        <time datetime="@c.CreatedAt.ToString("O")">@c.CreatedAt.LocalDateTime.ToString("g")</time>
+                        <p class="comment-text">@c.Text</p>
+                    </li>
+                }
+            </ul>
+        }
+
+        <h3>Lascia un commento</h3>
+        <p class="muted">I commenti vengono pubblicati dopo la moderazione.</p>
+        <StatusMessage Message="@commentMessage" IsSuccess="commentOk" />
+        <EditForm Model="Form" FormName="comment" OnValidSubmit="PostCommentAsync" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="field">
+                <label for="author">Nome</label>
+                <InputText id="author" @bind-Value="Form.Author" maxlength="80" autocomplete="nickname" />
+            </div>
+            <div class="field">
+                <label for="text">Commento</label>
+                <InputTextArea id="text" @bind-Value="Form.Text" rows="4" maxlength="1000" />
+            </div>
+            <div class="hp" aria-hidden="true">
+                <label for="website">Non compilare questo campo</label>
+                <InputText id="website" @bind-Value="Form.Website" tabindex="-1" autocomplete="off" />
+            </div>
+            <button type="submit">Invia commento</button>
+        </EditForm>
+    </section>
+}
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+
+    [SupplyParameterFromForm(FormName = "rate", Name = "stars")] public int? Stars { get; set; }
+    [SupplyParameterFromForm(FormName = "comment")] public CommentForm Form { get => form ??= new(); set => form = value; }
+    private CommentForm? form;
+
+    private VideoSummary? video;
+    private bool notFound;
+    private string? loadError;
+    private double average;
+    private int ratingCount;
+    private bool hasVoted;
+    private bool voteStateUnknown;
+    private string? ratingMessage;
+    private bool ratingOk;
+    private List<PublicComment> comments = [];
+    private string? commentsError;
+    private string? commentMessage;
+    private bool commentOk;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Form ??= new();
+        var v = await Api.GetVideoAsync(Id);
+        if (v.IsNotFound)
+        {
+            notFound = true;
+            if (HttpContext is not null)
+            {
+                HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            }
+            return;
+        }
+
+        if (!v.IsSuccess || v.Value is null)
+        {
+            loadError = v.Error;
+            return;
+        }
+
+        video = v.Value;
+        average = video.AverageRating;
+        ratingCount = video.RatingCount;
+
+        var mine = await Api.GetMyRatingAsync(Id);
+        hasVoted = mine.Value?.HasVoted ?? false;
+        voteStateUnknown = !mine.IsSuccess;
+
+        await LoadCommentsAsync();
+    }
+
+    private async Task LoadCommentsAsync()
+    {
+        var c = await Api.GetCommentsAsync(Id);
+        comments = c.Value ?? [];
+        commentsError = c.IsSuccess ? null : c.Error;
+    }
+
+    private async Task RateAsync()
+    {
+        if (Stars is not (>= 1 and <= 5))
+        {
+            ratingMessage = "Seleziona un voto da 1 a 5.";
+            ratingOk = false;
+            return;
+        }
+
+        var r = await Api.RateAsync(Id, Stars.Value);
+        if (r.IsSuccess && r.Value is not null)
+        {
+            average = r.Value.AverageRating;
+            ratingCount = r.Value.RatingCount;
+            hasVoted = true;
+            ratingMessage = "Grazie per il tuo voto!";
+            ratingOk = true;
+        }
+        else
+        {
+            if (r.Status == System.Net.HttpStatusCode.Conflict)
+            {
+                hasVoted = true;
+            }
+
+            ratingMessage = r.Error;
+            ratingOk = false;
+        }
+    }
+
+    private async Task PostCommentAsync()
+    {
+        var r = await Api.PostCommentAsync(Id, Form);
+        if (r.IsSuccess)
+        {
+            commentMessage = "Commento inviato: è in attesa di moderazione e sarà visibile dopo l'approvazione.";
+            commentOk = true;
+            Form = new();
+        }
+        else
+        {
+            commentMessage = r.Error;
+            commentOk = false;
+        }
+    }
+}

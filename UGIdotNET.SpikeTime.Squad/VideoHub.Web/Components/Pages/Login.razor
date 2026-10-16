@@ -1,0 +1,65 @@
+@page "/login"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@inject VideoHubApiClient Api
+@inject NavigationManager Nav
+
+<PageTitle>Accesso - VideoHub</PageTitle>
+<h1>Accesso amministratore</h1>
+
+<StatusMessage Message="@error" />
+<EditForm Model="Form" FormName="login" OnValidSubmit="LoginAsync" Enhance>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="field">
+        <label for="email">Email</label>
+        <InputText id="email" type="email" @bind-Value="Form.Email" autocomplete="username" />
+    </div>
+    <div class="field">
+        <label for="password">Password</label>
+        <InputText id="password" type="password" @bind-Value="Form.Password" autocomplete="current-password" />
+    </div>
+    <button type="submit">Accedi</button>
+</EditForm>
+
+@code {
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+
+    [SupplyParameterFromForm(FormName = "login")] private LoginForm Form { get => form ??= new(); set => form = value; }
+    private LoginForm? form;
+
+    private string? error;
+
+    protected override void OnInitialized() => Form ??= new();
+
+    private async Task LoginAsync()
+    {
+        var r = await Api.LoginAsync(Form);
+        if (!r.IsSuccess || r.Value is null || HttpContext is null)
+        {
+            error = r.Error ?? "Accesso non riuscito.";
+            return;
+        }
+
+        // Only admins can exist (no public registration); the API enforces the role on every admin call.
+        var identity = new ClaimsIdentity(
+            [
+                new Claim(ClaimTypes.Name, Form.Email),
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(AuthClaims.AccessToken, r.Value.AccessToken)
+            ],
+            CookieAuthenticationDefaults.AuthenticationScheme);
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(identity),
+            new AuthenticationProperties
+            {
+                IsPersistent = false,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(Math.Max(60, r.Value.ExpiresIn - 30))
+            });
+
+        Nav.NavigateTo("/admin", forceLoad: true);
+    }
+}

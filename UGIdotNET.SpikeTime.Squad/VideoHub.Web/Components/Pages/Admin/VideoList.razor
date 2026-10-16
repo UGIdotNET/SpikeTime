@@ -1,0 +1,87 @@
+@page "/admin"
+@attribute [Authorize(Roles = "Admin")]
+@inject VideoHubApiClient Api
+
+<PageTitle>Gestione video - VideoHub</PageTitle>
+<h1>Gestione video</h1>
+<p><a class="button" href="/admin/videos/new">Nuovo video</a></p>
+
+<StatusMessage Message="@message" IsSuccess="ok" />
+
+@if (!loadOk)
+{
+    <StatusMessage Message="@loadError" />
+}
+else if (videos.Count == 0)
+{
+    <p class="empty">Nessun video presente. Aggiungine uno con "Nuovo video".</p>
+}
+else
+{
+    <table>
+        <caption class="sr-only">Elenco dei video</caption>
+        <thead>
+            <tr><th scope="col">Titolo</th><th scope="col">Voti</th><th scope="col">Azioni</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var v in videos)
+            {
+                <tr>
+                    <td><a href="/video/@v.Id">@v.Title</a></td>
+                    <td><StarDisplay Average="v.AverageRating" Count="v.RatingCount" /></td>
+                    <td class="actions">
+                        <a href="/admin/videos/@v.Id/edit">Modifica</a>
+                        <a href="/admin/ratings?videoId=@v.Id">Voti</a>
+                        <form method="post" @formname="@($"delete-{v.Id}")" @onsubmit="() => DeleteAsync(v)">
+                            <AntiforgeryToken />
+                            <button type="submit" class="danger" aria-label="@($"Elimina il video {v.Title}")">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <nav class="pager" aria-label="Paginazione">
+        @if (CurrentPage > 1)
+        {
+            <a href="/admin?page=@(CurrentPage - 1)">&larr; Precedente</a>
+        }
+        <span>Pagina @CurrentPage</span>
+        @if (videos.Count == PageSize)
+        {
+            <a href="/admin?page=@(CurrentPage + 1)">Successiva &rarr;</a>
+        }
+    </nav>
+}
+
+@code {
+    private const int PageSize = 20;
+
+    [SupplyParameterFromQuery(Name = "page")] public int? PageParam { get; set; }
+
+    private List<VideoSummary> videos = [];
+    private bool loadOk = true;
+    private string? loadError;
+    private string? message;
+    private bool ok;
+
+    private int CurrentPage => Math.Max(1, PageParam ?? 1);
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        var r = await Api.GetVideosAsync(CurrentPage, PageSize);
+        loadOk = r.IsSuccess;
+        loadError = r.Error;
+        videos = r.Value ?? [];
+    }
+
+    private async Task DeleteAsync(VideoSummary v)
+    {
+        var r = await Api.DeleteVideoAsync(v.Id);
+        ok = r.IsSuccess;
+        message = r.IsSuccess ? $"Video \"{v.Title}\" eliminato." : r.Error;
+        await LoadAsync();
+    }
+}

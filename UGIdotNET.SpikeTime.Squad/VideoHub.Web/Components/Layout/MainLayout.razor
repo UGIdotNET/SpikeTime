@@ -1,0 +1,26 @@
+@inherits LayoutComponentBase
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<header class="site-header">
+    <a class="brand" href="/">VideoHub</a>
+    <nav aria-label="Navigazione principale">
+        <NavLink href="/" Match="NavLinkMatch.All">Video</NavLink>
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <NavLink href="/admin" Match="NavLinkMatch.All">Gestione video</NavLink>
+                <NavLink href="/admin/ratings">Voti</NavLink>
+                <NavLink href="/admin/comments">Commenti</NavLink>
+                <form method="post" action="/logout" class="inline-form">
+                    <AntiforgeryToken />
+                    <button type="submit" class="link-button">Esci</button>
+                </form>
+            </Authorized>
+            <NotAuthorized>
+                <NavLink href="/login">Area admin</NavLink>
+            </NotAuthorized>
+        </AuthorizeView>
+    </nav>
+</header>
+<main id="main">
+    @Body
+</main>

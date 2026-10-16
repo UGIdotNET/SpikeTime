@@ -1,0 +1,68 @@
+@page "/"
+@inject VideoHubApiClient Api
+
+<PageTitle>VideoHub</PageTitle>
+<h1>Video</h1>
+
+@if (!result.IsSuccess)
+{
+    <StatusMessage Message="@result.Error" />
+    <p><a href="@PageUrl(CurrentPage)">Riprova</a></p>
+}
+else if (videos.Count == 0)
+{
+    <p class="empty">@(CurrentPage > 1 ? "Nessun video in questa pagina." : "Non ci sono ancora video pubblicati.")</p>
+    @if (CurrentPage > 1)
+    {
+        <a href="/">Torna alla prima pagina</a>
+    }
+}
+else
+{
+    <ul class="video-list">
+        @foreach (var v in videos)
+        {
+            <li class="card">
+                <h2><a href="/video/@v.Id">@v.Title</a></h2>
+                @if (!string.IsNullOrWhiteSpace(v.Description))
+                {
+                    <p>@Truncate(v.Description, 200)</p>
+                }
+                <StarDisplay Average="v.AverageRating" Count="v.RatingCount" />
+            </li>
+        }
+    </ul>
+
+    <nav class="pager" aria-label="Paginazione">
+        @if (CurrentPage > 1)
+        {
+            <a href="@PageUrl(CurrentPage - 1)" rel="prev">&larr; Precedente</a>
+        }
+        <span>Pagina @CurrentPage</span>
+        @if (videos.Count == PageSize)
+        {
+            <a href="@PageUrl(CurrentPage + 1)" rel="next">Successiva &rarr;</a>
+        }
+    </nav>
+}
+
+@code {
+    private const int PageSize = 12;
+
+    [SupplyParameterFromQuery(Name = "page")] public int? PageParam { get; set; }
+
+    private ApiResult<List<VideoSummary>> result = ApiResult<List<VideoSummary>>.Ok([], System.Net.HttpStatusCode.OK);
+    private List<VideoSummary> videos = [];
+
+    private int CurrentPage => Math.Max(1, PageParam ?? 1);
+
+    protected override async Task OnInitializedAsync()
+    {
+        result = await Api.GetVideosAsync(CurrentPage, PageSize);
+        videos = result.Value ?? [];
+    }
+
+    private static string PageUrl(int page) => page <= 1 ? "/" : $"/?page={page}";
+
+    private static string Truncate(string s, int max) => s.Length <= max ? s : s[..max].TrimEnd() + "…";
+}

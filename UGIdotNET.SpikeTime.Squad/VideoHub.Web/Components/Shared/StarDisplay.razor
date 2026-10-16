@@ -1,0 +1,23 @@
+@* Read-only star display: average out of 5. *@
+<span class="stars" role="img" aria-label="@Label">
+    <span aria-hidden="true">@Glyphs</span>
+    <span class="stars-text">@(Count == 0 ? "Nessun voto" : $"{Average:0.0}/5 ({Count} {(Count == 1 ? "voto" : "voti")})")</span>
+</span>
+
+@code {
+    [Parameter] public double Average { get; set; }
+    [Parameter] public int Count { get; set; }
+
+    private string Label => Count == 0
+        ? "Nessun voto"
+        : $"Valutazione media {Average:0.0} su 5, {Count} {(Count == 1 ? "voto" : "voti")}";
+
+    private string Glyphs
+    {
+        get
+        {
+            var filled = (int)Math.Round(Average);
+            return new string('★', filled) + new string('☆', 5 - filled);
+        }
+    }
+}

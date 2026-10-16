@@ -1,0 +1,102 @@
+@page "/admin/comments"
+@attribute [Authorize(Roles = "Admin")]
+@inject VideoHubApiClient Api
+
+<PageTitle>Moderazione commenti - VideoHub</PageTitle>
+<h1>Moderazione commenti</h1>
+
+<nav class="tabs" aria-label="Filtro per stato">
+    @foreach (var (value, label) in Statuses)
+    {
+        <a href="/admin/comments?status=@value" aria-current="@(Current == value ? "page" : null)">@label</a>
+    }
+</nav>
+
+<StatusMessage Message="@message" IsSuccess="ok" />
+
+@if (!loadOk)
+{
+    <StatusMessage Message="@loadError" />
+}
+else if (comments.Count == 0)
+{
+    <p class="empty">Nessun commento con stato "@StatusLabel(Current)".</p>
+}
+else
+{
+    <ul class="comments">
+        @foreach (var c in comments)
+        {
+            <li class="card">
+                <p><strong>@c.Author</strong> su <a href="/video/@c.VideoId">@c.VideoTitle</a>
+                    <time datetime="@c.CreatedAt.ToString("O")">@c.CreatedAt.LocalDateTime.ToString("g")</time>
+                    - @StatusLabel(c.Status)</p>
+                <p class="comment-text">@c.Text</p>
+                <div class="actions">
+                    @if (c.Status != "Approved")
+                    {
+                        <form method="post" @formname="@($"approve-{c.Id}")" @onsubmit="() => ModerateAsync(c, true)">
+                            <AntiforgeryToken />
+                            <button type="submit">Approva</button>
+                        </form>
+                    }
+                    @if (c.Status != "Rejected")
+                    {
+                        <form method="post" @formname="@($"reject-{c.Id}")" @onsubmit="() => ModerateAsync(c, false)">
+                            <AntiforgeryToken />
+                            <button type="submit">Rifiuta</button>
+                        </form>
+                    }
+                    <form method="post" @formname="@($"delete-{c.Id}")" @onsubmit="() => DeleteAsync(c)">
+                        <AntiforgeryToken />
+                        <button type="submit" class="danger">Elimina</button>
+                    </form>
+                </div>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private static readonly (string Value, string Label)[] Statuses =
+        [("Pending", "In attesa"), ("Approved", "Approvati"), ("Rejected", "Rifiutati")];
+
+    [SupplyParameterFromQuery(Name = "status")] public string? StatusParam { get; set; }
+
+    private List<AdminComment> comments = [];
+    private bool loadOk = true;
+    private string? loadError;
+    private string? message;
+    private bool ok;
+
+    private string Current => Statuses.Any(s => s.Value == StatusParam) ? StatusParam! : "Pending";
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private static string StatusLabel(string status) =>
+        Statuses.FirstOrDefault(s => s.Value == status).Label ?? status;
+
+    private async Task LoadAsync()
+    {
+        var r = await Api.GetAdminCommentsAsync(Current);
+        loadOk = r.IsSuccess;
+        loadError = r.Error;
+        comments = r.Value ?? [];
+    }
+
+    private async Task ModerateAsync(AdminComment c, bool approve)
+    {
+        var r = await Api.ModerateCommentAsync(c.Id, approve);
+        ok = r.IsSuccess;
+        message = r.IsSuccess ? (approve ? "Commento approvato." : "Commento rifiutato.") : r.Error;
+        await LoadAsync();
+    }
+
+    private async Task DeleteAsync(AdminComment c)
+    {
+        var r = await Api.DeleteCommentAsync(c.Id);
+        ok = r.IsSuccess;
+        message = r.IsSuccess ? "Commento eliminato." : r.Error;
+        await LoadAsync();
+    }
+}

@@ -1,0 +1,80 @@
+@page "/admin/ratings"
+@attribute [Authorize(Roles = "Admin")]
+@inject VideoHubApiClient Api
+
+<PageTitle>Voti - VideoHub</PageTitle>
+<h1>Panoramica voti</h1>
+
+@if (!loadOk)
+{
+    <StatusMessage Message="@error" />
+}
+else
+{
+    <form method="get" action="/admin/ratings" class="filter">
+        <label for="videoId">Video</label>
+        <select id="videoId" name="videoId">
+            <option value="">Tutti</option>
+            @foreach (var v in videos)
+            {
+                <option value="@v.Id" selected="@(v.Id == VideoId)">@v.Title</option>
+            }
+        </select>
+        <button type="submit">Filtra</button>
+    </form>
+
+    @if (summary.Count == 0)
+    {
+        <p class="empty">Nessun voto registrato.</p>
+    }
+    else
+    {
+        <table>
+            <caption class="sr-only">Voti per video</caption>
+            <thead>
+                <tr><th scope="col">Video</th><th scope="col">Voti</th><th scope="col">Media</th><th scope="col">Distribuzione (1★…5★)</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var g in summary)
+                {
+                    <tr>
+                        <td>@g.Title</td>
+                        <td>@g.Count</td>
+                        <td>@g.Average.ToString("0.0")</td>
+                        <td>@string.Join(" / ", g.Distribution)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    private sealed record Row(string Title, int Count, double Average, int[] Distribution);
+
+    [SupplyParameterFromQuery(Name = "videoId")] public Guid? VideoId { get; set; }
+
+    private List<VideoSummary> videos = [];
+    private List<Row> summary = [];
+    private bool loadOk = true;
+    private string? error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await Api.GetVideosAsync(1, 100);
+        videos = list.Value ?? [];
+
+        var r = await Api.GetAdminRatingsAsync(VideoId);
+        loadOk = r.IsSuccess;
+        error = r.Error ?? list.Error;
+        summary = (r.Value ?? [])
+            .GroupBy(x => x.VideoTitle)
+            .Select(g => new Row(
+                g.Key,
+                g.Count(),
+                g.Average(x => x.Stars),
+                Enumerable.Range(1, 5).Select(s => g.Count(x => x.Stars == s)).ToArray()))
+            .OrderBy(x => x.Title)
+            .ToList();
+    }
+}
